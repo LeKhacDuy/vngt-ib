@@ -1,0 +1,64 @@
+/* =============================================
+   VNGroup Tourist - Shared Stylesheet
+   ============================================= */
+
+/* Material Icons */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}
+
+/* Glassmorphism */
+.glassmorphism-effect {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Text Utilities */
+.text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #aaaeac;
+    border-radius: 10px;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* FAQ Accordion */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.accordion-item:focus-within .accordion-content {
+    max-height: 500px;
+}
+.accordion-item:focus-within .chevron {
+    transform: rotate(180deg);
+}
+
+/* Destination editorial mask */
+.editorial-mask {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+
+/* Contact hero mask */
+.hero-mask {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+
+/* About page mask */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+}
