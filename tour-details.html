@@ -3,36 +3,37 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chi tiết Tour - VNGroup Tourist</title>
+<title>Tour Details | VNGroup Tourist</title>
 <link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png"/>
 <link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon.png"/>
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"/>
 <meta name="theme-color" content="#BC342E"/>
-<meta name="description" content="Xem chi tiết lịch trình, giá cả và đặt tour du lịch inbound Việt Nam cùng VNGroup Tourist. Hướng dẫn viên tiếng Anh chuyên nghiệp, bao gồm ăn trưa và phương tiện đuầy đủ."/>
-<meta name="keywords" content="chi tiết tour, đặt tour Vietnam, tour inbound, VNGroup Tourist, lịch trình tour"/>
+<meta name="description" content="See the itinerary and price, and book your Vietnam tour with VNGroup Tourist. Professional English-speaking guides."/>
+<meta name="keywords" content="tour details, book Vietnam tour, Vietnam tours, VNGroup Tourist, tour itinerary"/>
 <meta name="author" content="VNGroup Tourist"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vngrouptourist.com/tour-details.html"/>
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="VNGroup Tourist"/>
-<meta property="og:title" content="Chi tiết Tour - VNGroup Tourist"/>
-<meta property="og:description" content="Xem chi tiết lịch trình, giá cả và đặt tour du lịch inbound Việt Nam hấp dẫn."/>
+<meta property="og:title" content="Tour Details | VNGroup Tourist"/>
+<meta property="og:description" content="See the itinerary and price, and book an unforgettable Vietnam tour."/>
 <meta property="og:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
 <meta property="og:url" content="https://vngrouptourist.com/tour-details.html"/>
-<meta property="og:locale" content="vi_VN"/>
+<meta property="og:locale" content="en_US"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Chi tiết Tour - VNGroup Tourist"/>
-<meta name="twitter:description" content="Xem chi tiết lịch trình và đặt tour du lịch inbound Việt Nam."/>
+<meta name="twitter:title" content="Tour Details | VNGroup Tourist"/>
+<meta name="twitter:description" content="See the itinerary and book your Vietnam tour."/>
 <meta name="twitter:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
-<!-- JSON-LD TouristTrip (cập nhật động theo tour) -->
+<!-- JSON-LD TouristTrip (filled in per tour by the script below) -->
 <script type="application/ld+json" id="tour-schema">{"@context":"https://schema.org","@type":"TouristTrip","touristType":"International tourists","provider":{"@type":"TravelAgency","name":"VNGroup Tourist","url":"https://vngrouptourist.com"}}</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
 <script src="assets/js/tailwind.config.js"></script>
+<script src="assets/js/tour-utils.js"></script>
 <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body class="bg-background text-on-surface font-body antialiased">
@@ -77,7 +78,7 @@
 <!-- Breadcrumb -->
 <div class="pt-4 pb-2">
   <a href="tours.html" class="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary transition-colors font-medium">
-    <span class="material-symbols-outlined text-sm">arrow_back</span> Quay lại danh sách tour
+    <span class="material-symbols-outlined text-sm">arrow_back</span> Back to all tours
   </a>
 </div>
 
@@ -99,7 +100,7 @@
 <!-- Error state -->
 <div id="detail-error" class="hidden text-center py-32">
   <span class="material-symbols-outlined text-6xl text-outline-variant">error_outline</span>
-  <p class="mt-4 text-on-surface-variant font-medium text-lg">Không tìm thấy tour. <a href="tours.html" class="text-primary font-bold">Quay lại danh sách</a></p>
+  <p class="mt-4 text-on-surface-variant font-medium text-lg">We could not find this tour. <a href="tours.html" class="text-primary font-bold">See all tours</a></p>
 </div>
 
 <!-- Dynamic content injected here -->
@@ -107,7 +108,8 @@
 </main>
 <script>
 (async function () {
-  const API_BASE = 'https://lekhacduy.io.vn';
+  const API_BASE = VNGT.API_BASE;
+  const SITE     = 'https://vngrouptourist.com';
   const params  = new URLSearchParams(window.location.search);
   const tourId  = params.get('id');
 
@@ -118,128 +120,122 @@
   if (!tourId) { showError(); return; }
 
   try {
-    const res  = await fetch(`${API_BASE}/api/tours/${tourId}`);
+    const res  = await fetch(`${API_BASE}/api/tours/${encodeURIComponent(tourId)}`);
     if (!res.ok) throw new Error('Not found');
     const json = await res.json();
     const t    = json.data;
 
+    const name      = VNGT.tidy(t.name);
+    const dest      = VNGT.destinationName(t.destination) || 'Vietnam';
+    const transport = VNGT.tidy(t.transport);
+    const duration  = Number(t.duration) || 1;
+    // Day trips carry the API's default "3 sao" but have no hotel.
+    const hotels    = duration > 1 ? VNGT.hotels(t.hotel_rating) : '';
+    const price     = VNGT.price(t.web_price);
+    const hero      = VNGT.image(t.thumbnail, 1200, 600);
+    const pageUrl   = `${SITE}/tour-details.html?id=${t.id}`;
+
     // Update page title
-    document.title = `${t.name} - VNGroup Tourist`;
+    document.title = `${name} | VNGroup Tourist`;
 
     // ── Dynamic SEO update ──────────────────────────────────
-    const heroImg = t.thumbnail ? API_BASE + t.thumbnail : 'https://vngrouptourist.com/assets/images/og-tours.jpg';
-    const seoDesc = (t.highlights || t.special_notes || 'Tour inbound Việt Nam chất lượng cao cùng VNGroup Tourist.').split('\n')[0].replace(/^\d+\.\s*/,'').trim().slice(0, 160);
+    const ogImage = t.thumbnail ? hero : `${SITE}/assets/images/og-tours.jpg`;
+    const seoDesc = VNGT.seoDescription(t);
     const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
     setMeta('meta[name="description"]', seoDesc);
-    setMeta('meta[property="og:title"]', `${t.name} - VNGroup Tourist`);
+    setMeta('meta[property="og:title"]', `${name} | VNGroup Tourist`);
     setMeta('meta[property="og:description"]', seoDesc);
-    setMeta('meta[property="og:image"]', heroImg);
-    setMeta('meta[property="og:url"]', `https://vngrouptourist.com/tour-details.html?id=${t.id}`);
-    setMeta('meta[name="twitter:title"]', `${t.name} - VNGroup Tourist`);
+    setMeta('meta[property="og:image"]', ogImage);
+    setMeta('meta[property="og:url"]', pageUrl);
+    setMeta('meta[name="twitter:title"]', `${name} | VNGroup Tourist`);
     setMeta('meta[name="twitter:description"]', seoDesc);
-    setMeta('meta[name="twitter:image"]', heroImg);
+    setMeta('meta[name="twitter:image"]', ogImage);
     // Canonical
     let canon = document.querySelector('link[rel="canonical"]');
     if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
-    canon.href = `https://vngrouptourist.com/tour-details.html?id=${t.id}`;
+    canon.href = pageUrl;
     // JSON-LD TouristTrip
     const schema = document.getElementById('tour-schema');
     if (schema) schema.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'TouristTrip',
-      'name': t.name,
+      'name': name,
       'description': seoDesc,
-      'image': heroImg,
-      'url': `https://vngrouptourist.com/tour-details.html?id=${t.id}`,
-      'offers': { '@type': 'Offer', 'price': t.web_price ? Math.round(t.web_price / 25000) : 0, 'priceCurrency': 'USD', 'availability': 'https://schema.org/InStock' },
-      'provider': { '@type': 'TravelAgency', 'name': 'VNGroup Tourist', 'url': 'https://vngrouptourist.com' },
+      'image': ogImage,
+      'url': pageUrl,
+      ...(t.web_price ? { 'offers': { '@type': 'Offer', 'price': Math.round(t.web_price / 25000), 'priceCurrency': 'USD', 'availability': 'https://schema.org/InStock' } } : {}),
+      'provider': { '@type': 'TravelAgency', 'name': 'VNGroup Tourist', 'url': SITE },
       'touristType': 'International tourists'
     });
     // ─────────────────────────────────────────────────────────
-
-
-    // Format price
-    const price = t.web_price
-      ? '$' + Math.round(t.web_price / 25000).toLocaleString('en-US')
-      : 'Contact us';
-
-    // Hero image
-    const hero = t.thumbnail ? API_BASE + t.thumbnail : 'https://placehold.co/1200x600/eef2ef/006941?text=VNGroup+Tourist';
 
     // Gallery
     const galleryImgs = t.gallery_images || [];
     const galleryHTML = galleryImgs.length
       ? `<section class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12 h-[360px]">
           <div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-lg">
-            <img src="${API_BASE + galleryImgs[0]}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='${hero}'"/>
+            <img src="${API_BASE + galleryImgs[0]}" alt="${VNGT.esc(name)}, photo 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='${hero}'"/>
           </div>
-          ${(galleryImgs.slice(1,3)).map(g => `
+          ${(galleryImgs.slice(1,3)).map((g, i) => `
           <div class="rounded-xl overflow-hidden shadow-lg">
-            <img src="${API_BASE + g}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='${hero}'"/>
+            <img src="${API_BASE + g}" alt="${VNGT.esc(name)}, photo ${i + 2}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='${hero}'"/>
           </div>`).join('')}
         </section>`
       : '';
 
-    // Itinerary
+    // Itinerary: morning / afternoon / evening of each day
+    const filled = v => v && v.trim() && v.trim() !== '.';
+    const PARTS = [['morning', 'Morning', 'text-primary'], ['noon', 'Afternoon', 'text-secondary'], ['evening', 'Evening', 'text-tertiary']];
     const itin = t.itineraries || [];
     const itinHTML = itin.length ? itin.map(day => {
-      const parts = [
-        day.morning?.description && day.morning.description !== '.' ? `<div class="mb-3"><span class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">🌅 Buổi sáng</span><p class="text-on-surface-variant leading-relaxed text-sm">${day.morning.description.replace(/\r?\n/g,'<br>')}</p></div>` : '',
-        day.noon?.description    && day.noon.description    !== '.' ? `<div class="mb-3"><span class="text-[10px] font-bold text-secondary uppercase tracking-widest block mb-1">☀️ Buổi trưa / chiều</span><p class="text-on-surface-variant leading-relaxed text-sm">${day.noon.description.replace(/\r?\n/g,'<br>')}</p></div>` : '',
-        day.evening?.description && day.evening.description !== '.' ? `<div class="mb-3"><span class="text-[10px] font-bold text-tertiary uppercase tracking-widest block mb-1">🌙 Buổi tối</span><p class="text-on-surface-variant leading-relaxed text-sm">${day.evening.description.replace(/\r?\n/g,'<br>')}</p></div>` : '',
-      ].filter(Boolean).join('');
+      const parts = PARTS.map(([key, label, color]) => {
+        const p = day[key];
+        if (!p || !filled(p.description)) return '';
+        const title = filled(p.title) ? ` · ${VNGT.esc(VNGT.tidy(p.title))}` : '';
+        return `<div class="mb-3"><span class="text-[10px] font-bold ${color} uppercase tracking-widest block mb-1">${label}${title}</span><p class="text-on-surface-variant leading-relaxed text-sm">${VNGT.esc(p.description.trim()).replace(/\r?\n/g,'<br>')}</p></div>`;
+      }).join('');
 
       return `<div class="group relative pl-12 pb-10">
         <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-primary-container flex items-center justify-center z-10">
           <span class="text-xs font-bold text-on-primary-container">${day.day_number}</span>
         </div>
         <div class="absolute left-4 top-8 bottom-0 w-[2px] bg-primary-container/30 group-last:bg-transparent"></div>
-        <h3 class="font-headline text-lg font-bold text-on-surface mb-3">${day.title && day.title !== '.' ? day.title : 'Ngày ' + day.day_number}</h3>
-        ${parts || '<p class="text-on-surface-variant text-sm">Xem chi tiết khi đặt tour.</p>'}
+        <h3 class="font-headline text-lg font-bold text-on-surface mb-3">${filled(day.title) ? VNGT.esc(VNGT.tidy(day.title)) : 'Day ' + day.day_number}</h3>
+        ${parts || '<p class="text-on-surface-variant text-sm">Full details are sent with your booking confirmation.</p>'}
       </div>`;
-    }).join('') : '<p class="text-on-surface-variant">Chưa có lịch trình chi tiết.</p>';
+    }).join('') : '<p class="text-on-surface-variant">The day-by-day itinerary is available on request. <a href="contact.html" class="text-primary font-bold">Contact us</a>.</p>';
 
-    // Highlights
-    const highlights = (t.highlights || '').split('\n').filter(l => l.trim()).map(l =>
-      `<li class="flex items-start gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>${l.replace(/^\d+\.\s*/,'').trim()}</li>`
-    ).join('');
+    const highlightsHTML = VNGT.formatText(t.highlights, { skipHeading: /^(tour )?highlights?$/i });
+    const notesHTML      = VNGT.formatText(t.special_notes);
+    const policyHTML     = VNGT.formatText(t.cancellation_policy);
+    const textBox = html => `<div class="bg-surface-container-low rounded-2xl p-6 text-sm text-on-surface-variant leading-relaxed">${html}</div>`;
 
-    // Special notes
-    const notes = t.special_notes || '';
-    const notesHTML = notes
-      ? `<div class="bg-surface-container-low rounded-2xl p-6 text-sm text-on-surface-variant whitespace-pre-line leading-relaxed">${notes.replace(/\r?\n/g,'<br>')}</div>`
-      : '';
-
-    // Cancellation
-    const cancelHTML = t.cancellation_policy && t.cancellation_policy !== '.'
-      ? `<div class="bg-surface-container-low rounded-2xl p-4 mt-4 text-xs text-on-surface-variant leading-relaxed">${t.cancellation_policy.replace(/\r?\n/g,'<br>')}</div>`
-      : '';
+    const tags = VNGT.tagBadges(t, 2);
 
     content.innerHTML = `
     <!-- Hero -->
     <section class="relative h-[500px] min-h-[400px] w-full rounded-3xl overflow-hidden mb-10">
-      <img src="${hero}" alt="${t.name}" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://placehold.co/1200x600/eef2ef/006941?text=VNGroup'"/>
+      <img src="${hero}" alt="${VNGT.esc(name)}" class="absolute inset-0 w-full h-full object-cover" onerror="${VNGT.fallback(1200, 600)}"/>
       <div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-black/20 to-transparent"></div>
       <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
         <div class="flex flex-wrap gap-2 mb-4">
-          <span class="bg-primary/90 backdrop-blur text-on-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">${t.category?.name || 'Inbound'}</span>
-          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">${t.duration} Ngày</span>
-          ${t.hotel_rating ? `<span class="bg-white/20 backdrop-blur text-white px-3 py-1 rounded-full text-xs font-bold">${t.hotel_rating}</span>` : ''}
+          ${tags}
+          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">${VNGT.days(duration)}</span>
         </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white font-headline leading-tight max-w-3xl mb-5">${t.name}</h1>
-        <div class="flex flex-wrap items-center gap-6 text-white/90">
-          <div class="flex items-center gap-2">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white font-headline leading-tight max-w-3xl mb-5">${VNGT.esc(name)}</h1>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-white/90">
+          ${transport ? `<div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary-fixed">directions_car</span>
-            <span class="font-medium text-sm">${t.transport || 'Xe đời mới'}</span>
-          </div>
+            <span class="font-medium text-sm">${VNGT.esc(transport)}</span>
+          </div>` : ''}
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary-fixed">location_on</span>
-            <span class="font-medium text-sm">${t.destination?.name || 'Việt Nam'}</span>
+            <span class="font-medium text-sm">${VNGT.esc(dest)}</span>
           </div>
-          <div class="flex items-center gap-2">
+          ${hotels ? `<div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary-fixed">hotel</span>
-            <span class="font-medium text-sm">${t.hotel_rating || '5 sao'}</span>
-          </div>
+            <span class="font-medium text-sm">${hotels}</span>
+          </div>` : ''}
         </div>
       </div>
     </section>
@@ -251,24 +247,30 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
 
       <!-- Left column -->
-      <div class="lg:col-span-8 space-y-14">
+      <div class="lg:col-span-8 space-y-14 min-w-0">
 
         <!-- Highlights -->
-        ${highlights ? `<section>
-          <h2 class="font-headline text-2xl font-bold mb-5">Điểm nổi bật</h2>
-          <ul class="space-y-2">${highlights}</ul>
+        ${highlightsHTML ? `<section>
+          <h2 class="font-headline text-2xl font-bold mb-5">Highlights</h2>
+          <div class="text-sm text-on-surface-variant leading-relaxed">${highlightsHTML}</div>
         </section>` : ''}
 
         <!-- Itinerary -->
         <section>
-          <h2 class="font-headline text-2xl font-bold mb-8">Lịch trình tour</h2>
+          <h2 class="font-headline text-2xl font-bold mb-8">Itinerary</h2>
           <div class="space-y-2">${itinHTML}</div>
         </section>
 
-        <!-- Notes -->
+        <!-- Inclusions and notes -->
         ${notesHTML ? `<section>
-          <h2 class="font-headline text-2xl font-bold mb-5">Thông tin bao gồm & lưu ý</h2>
-          ${notesHTML}
+          <h2 class="font-headline text-2xl font-bold mb-5">What's included &amp; good to know</h2>
+          ${textBox(notesHTML)}
+        </section>` : ''}
+
+        <!-- Payment and cancellation, as entered for this tour -->
+        ${policyHTML ? `<section id="terms" class="scroll-mt-28">
+          <h2 class="font-headline text-2xl font-bold mb-5">Payment &amp; cancellation</h2>
+          ${textBox(policyHTML)}
         </section>` : ''}
       </div>
 
@@ -278,40 +280,45 @@
           <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_32px_64px_-16px_rgba(188,52,46,0.10)] border border-outline-variant/10">
             <div class="flex justify-between items-baseline mb-6">
               <div>
-                <span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest">From</span>
+                <span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest">${VNGT.priceLabel(t.web_price)}</span>
                 <p class="text-3xl font-headline font-extrabold text-primary mt-1">${price}</p>
               </div>
-              <span class="text-sm text-on-surface-variant font-medium">/ người</span>
+              ${t.web_price ? '<span class="text-sm text-on-surface-variant font-medium">per person</span>' : ''}
             </div>
             <div class="space-y-4 mb-6">
               <div class="flex items-center gap-3 text-sm">
                 <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                <span class="text-on-surface-variant">Thời gian: <strong>${t.duration} ngày</strong></span>
+                <span class="text-on-surface-variant">Duration: <strong>${VNGT.days(duration)}</strong></span>
               </div>
               <div class="flex items-center gap-3 text-sm">
                 <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                <span class="text-on-surface-variant">Điểm đến: <strong>${t.destination?.name || 'Việt Nam'}</strong></span>
+                <span class="text-on-surface-variant">Destination: <strong>${VNGT.esc(dest)}</strong></span>
               </div>
-              <div class="flex items-center gap-3 text-sm">
+              ${transport ? `<div class="flex items-center gap-3 text-sm">
                 <span class="material-symbols-outlined text-primary text-lg">directions_car</span>
-                <span class="text-on-surface-variant">Phương tiện: <strong>${t.transport || '—'}</strong></span>
-              </div>
+                <span class="text-on-surface-variant">Transport: <strong>${VNGT.esc(transport)}</strong></span>
+              </div>` : ''}
+              ${hotels ? `<div class="flex items-center gap-3 text-sm">
+                <span class="material-symbols-outlined text-primary text-lg">hotel</span>
+                <span class="text-on-surface-variant">Hotels: <strong>${hotels.replace(' hotels', '')}</strong></span>
+              </div>` : ''}
             </div>
-            <a href="booking.html?tour_id=${t.id}&tour_code=${t.tour_code}"
+            <a href="booking.html?tour_id=${t.id}&tour_code=${encodeURIComponent(t.tour_code || '')}"
                class="block w-full py-4 bg-primary text-on-primary rounded-full font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20 text-center">
-              Đặt tour ngay
+              Book this tour
             </a>
             <p class="text-center text-xs text-on-surface-variant mt-4">
-              Miễn phí hủy trước 7 ngày khởi hành
+              ${policyHTML
+                ? '<a href="#terms" class="underline underline-offset-2 hover:text-primary">Payment &amp; cancellation terms</a>'
+                : '<a href="faqs.html" class="underline underline-offset-2 hover:text-primary">Cancellation policy</a>'}
             </p>
-            ${cancelHTML}
           </div>
 
           ${t.tour_code ? `<div class="bg-secondary-container/20 border border-secondary/20 p-5 rounded-2xl flex items-start gap-3">
             <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">confirmation_number</span>
             <div>
-              <p class="font-bold text-on-secondary-container text-sm">Mã tour</p>
-              <p class="text-on-secondary-container/80 text-lg font-bold">${t.tour_code}</p>
+              <p class="font-bold text-on-secondary-container text-sm">Tour code</p>
+              <p class="text-on-secondary-container/80 text-lg font-bold">${VNGT.esc(t.tour_code)}</p>
             </div>
           </div>` : ''}
         </div>
@@ -322,12 +329,13 @@
     content.classList.remove('hidden');
 
   } catch (e) {
+    console.error('Tour load failed:', e);
     showError();
   }
 
   function showError() {
-    document.getElementById('detail-skeleton').classList.add('hidden');
-    document.getElementById('detail-error').classList.remove('hidden');
+    skeleton.classList.add('hidden');
+    errEl.classList.remove('hidden');
   }
 })();
 </script>

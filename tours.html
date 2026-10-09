@@ -3,34 +3,35 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Danh sách Tour Inbound Việt Nam - VNGroup Tourist</title>
+<title>Vietnam Tours | VNGroup Tourist</title>
 <link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png"/>
 <link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon.png"/>
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"/>
 <meta name="theme-color" content="#BC342E"/>
-<meta name="description" content="Khám phá các tour du lịch inbound Việt Nam: Hạ Long, Mekong Delta, Sài Gòn, Huế, Hội An. Hướng dẫn viên tiếng Anh chuyên nghiệp, giá tốt nhất."/>
-<meta name="keywords" content="tour inbound Vietnam, danh sách tour, tour Hạ Long, tour Mekong, tour Sài Gòn, tour 1 ngày, tour miền Nam, tour miền Bắc"/>
+<meta name="description" content="Browse our Vietnam tours: Ha Long Bay, the Mekong Delta, Saigon, Hue, Hoi An and more. Professional English-speaking guides at the best prices."/>
+<meta name="keywords" content="Vietnam tours, tour list, Ha Long Bay tours, Mekong Delta tours, Saigon tours, Vietnam day trips, Southern Vietnam tours, Northern Vietnam tours"/>
 <meta name="author" content="VNGroup Tourist"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vngrouptourist.com/tours.html"/>
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="VNGroup Tourist"/>
-<meta property="og:title" content="Danh sách Tour Inbound Việt Nam - VNGroup Tourist"/>
-<meta property="og:description" content="Khám phá các tour du lịch inbound Việt Nam chất lượng cao: Hạ Long, Mekong, Sài Gòn, Huế và nhiều hơn nữa."/>
+<meta property="og:title" content="Vietnam Tours | VNGroup Tourist"/>
+<meta property="og:description" content="Quality Vietnam tours: Ha Long Bay, the Mekong Delta, Saigon, Hue and many more."/>
 <meta property="og:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
 <meta property="og:url" content="https://vngrouptourist.com/tours.html"/>
-<meta property="og:locale" content="vi_VN"/>
+<meta property="og:locale" content="en_US"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Danh sách Tour Inbound Việt Nam - VNGroup Tourist"/>
-<meta name="twitter:description" content="Khám phá các tour du lịch inbound Việt Nam chất lượng cao."/>
+<meta name="twitter:title" content="Vietnam Tours | VNGroup Tourist"/>
+<meta name="twitter:description" content="Quality Vietnam tours with VNGroup Tourist."/>
 <meta name="twitter:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
 <script src="assets/js/tailwind.config.js"></script>
+<script src="assets/js/tour-utils.js"></script>
 <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body class="bg-background font-body text-on-background antialiased overflow-x-hidden">
@@ -93,23 +94,7 @@ Filters
 <div id="destination-filters" class="space-y-2">
 <label class="flex items-center gap-3 cursor-pointer group">
 <input type="radio" name="destination" value="all" checked class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
-<span class="text-sm font-medium group-hover:text-primary transition-colors">All Regions</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input type="radio" name="destination" value="inbound_mienbac" class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
-<span class="text-sm font-medium group-hover:text-primary transition-colors">Miền Bắc</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input type="radio" name="destination" value="inbound_mientrung" class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
-<span class="text-sm font-medium group-hover:text-primary transition-colors">Miền Trung</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input type="radio" name="destination" value="inbound_miennam" class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
-<span class="text-sm font-medium group-hover:text-primary transition-colors">Miền Nam</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input type="radio" name="destination" value="inbound_hcm" class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
-<span class="text-sm font-medium group-hover:text-primary transition-colors">TP. Hồ Chí Minh</span>
+<span class="text-sm font-medium group-hover:text-primary transition-colors">All destinations</span>
 </label>
 </div>
 </div>
@@ -148,7 +133,7 @@ Filters
 <div class="flex-1">
 <!-- Count bar -->
 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-<p class="text-on-surface-variant font-medium">Showing <span id="tour-count" class="text-on-background font-bold">...</span> inbound tours</p>
+<p class="text-on-surface-variant font-medium">Showing <span id="tour-count" class="text-on-background font-bold">...</span> tours</p>
 </div>
 <!-- Tour Grid (dynamic) -->
 <div id="tour-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -165,46 +150,22 @@ Filters
 </div>
 
 <script>
-const API_BASE = 'https://lekhacduy.io.vn';
-const API_URL  = API_BASE + '/api/tours?category_code=inbound';
-
 let allTours = [];
 
-const VND_TO_USD = 25000;
-function formatPrice(price) {
-  if (!price) return 'Contact us';
-  const usd = Math.round(price / VND_TO_USD);
-  return '$' + usd.toLocaleString('en-US');
-}
-
-function getBadges(tour) {
-  if (!tour.subcategories || !tour.subcategories.length) return '';
-  return tour.subcategories.map(s => {
-    const color = s.color || '#BC342E';
-    return `<span style="background:${color}dd;" class="backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">${s.name}</span>`;
-  }).join('');
-}
-
 function buildCard(tour) {
-  const thumb = tour.thumbnail ? API_BASE + tour.thumbnail : 'https://placehold.co/600x400/eef2ef/006941?text=No+Image';
-  const price = formatPrice(tour.web_price);
-  const dest  = tour.destination ? tour.destination.name : '';
-  const transport = tour.transport || '';
-  const duration = tour.duration || 1;
-  const badges = getBadges(tour);
-  const durationLabel = duration === 1 ? '1 Day' : `${duration} Days`;
+  const name      = VNGT.esc(VNGT.tidy(tour.name));
+  const dest      = VNGT.esc(VNGT.destinationName(tour.destination));
+  const transport = VNGT.esc(VNGT.tidy(tour.transport));
+  const badges    = VNGT.tagBadges(tour, 2);
 
   return `
-  <div class="group bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(188,52,46,0.10)] cursor-pointer"
-       onclick="window.location.href='tour-details.html?id=${tour.id}'">
+  <a href="tour-details.html?id=${tour.id}" class="group block bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(188,52,46,0.10)]">
     <div class="relative h-56 overflow-hidden">
-      <img src="${thumb}" alt="${tour.name}"
+      <img src="${VNGT.image(tour.thumbnail)}" alt="${name}" loading="lazy"
            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-           onerror="this.src='https://placehold.co/600x400/eef2ef/006941?text=VNGroup+Tourist'"/>
+           onerror="${VNGT.fallback()}"/>
       <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-      <div class="absolute top-3 left-3 flex gap-2 flex-wrap">
-        ${badges || `<span class="bg-primary/90 backdrop-blur-md text-on-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Inbound</span>`}
-      </div>
+      ${badges ? `<div class="absolute top-3 left-3 flex gap-2 flex-wrap">${badges}</div>` : ''}
       ${dest ? `<div class="absolute bottom-3 left-3">
         <span class="bg-black/50 text-white text-[10px] font-semibold px-2 py-1 rounded-full flex items-center gap-1">
           <span class="material-symbols-outlined text-xs">location_on</span>${dest}
@@ -212,27 +173,37 @@ function buildCard(tour) {
       </div>` : ''}
     </div>
     <div class="p-5">
-      <h3 class="font-headline text-base font-bold group-hover:text-primary transition-colors mb-3 line-clamp-2 leading-snug">${tour.name}</h3>
+      <h3 class="font-headline text-base font-bold group-hover:text-primary transition-colors mb-3 line-clamp-2 leading-snug">${name}</h3>
       <div class="flex items-center gap-4 text-on-surface-variant text-xs mb-4">
         <div class="flex items-center gap-1">
           <span class="material-symbols-outlined text-sm">schedule</span>
-          <span>${durationLabel}</span>
+          <span>${VNGT.days(tour.duration)}</span>
         </div>
-        ${transport ? `<div class="flex items-center gap-1">
+        ${transport ? `<div class="flex items-center gap-1 min-w-0">
           <span class="material-symbols-outlined text-sm">directions_car</span>
-          <span class="truncate max-w-[140px]">${transport}</span>
+          <span class="truncate max-w-[180px]">${transport}</span>
         </div>` : ''}
       </div>
       <div class="flex items-center justify-between pt-3 border-t border-outline-variant/15">
         <div>
-          <span class="text-xs text-on-surface-variant font-medium block">From</span>
-          <span class="text-base font-extrabold text-primary">${price}</span>
+          <span class="text-xs text-on-surface-variant font-medium block">${VNGT.priceLabel(tour.web_price)}</span>
+          <span class="text-base font-extrabold text-primary">${VNGT.price(tour.web_price)}</span>
         </div>
-        <a class="bg-surface-container-low text-primary font-bold px-4 py-2 rounded-full text-xs hover:bg-primary hover:text-on-primary transition-all"
-           href="tour-details.html?id=${tour.id}" onclick="event.stopPropagation()">Xem chi tiết</a>
+        <span class="bg-surface-container-low text-primary font-bold px-4 py-2 rounded-full text-xs group-hover:bg-primary group-hover:text-on-primary transition-all">View details</span>
       </div>
     </div>
-  </div>`;
+  </a>`;
+}
+
+// One radio per destination that has tours, north to south, with a count.
+function buildDestinationFilters(tours) {
+  const box = document.getElementById('destination-filters');
+  box.insertAdjacentHTML('beforeend', VNGT.destinationsOf(tours).map(d => `
+    <label class="flex items-center gap-3 cursor-pointer group">
+      <input type="radio" name="destination" value="${d.code}" class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"/>
+      <span class="text-sm font-medium group-hover:text-primary transition-colors">${VNGT.esc(d.name)}</span>
+      <span class="ml-auto text-xs text-outline">${d.count}</span>
+    </label>`).join(''));
 }
 
 function renderTours(tours) {
@@ -259,7 +230,7 @@ function applyFilters() {
   let filtered = [...allTours];
 
   if (dest !== 'all') {
-    filtered = filtered.filter(t => t.destination && t.destination.code === dest);
+    filtered = filtered.filter(t => VNGT.destinationCode(t.destination) === dest);
   }
   if (dur === '1') {
     filtered = filtered.filter(t => t.duration === 1);
@@ -280,9 +251,8 @@ function applyFilters() {
 
 async function loadTours() {
   try {
-    const res  = await fetch(API_URL);
-    const json = await res.json();
-    allTours   = json.data || [];
+    allTours = await VNGT.loadTours();
+    buildDestinationFilters(allTours);
     renderTours(allTours);
 
     // Hook filters
@@ -295,7 +265,6 @@ async function loadTours() {
       document.querySelector('input[name="duration"][value="all"]').checked = true;
       document.getElementById('sort-select').value = 'default';
       renderTours(allTours);
-      document.getElementById('tour-count').textContent = allTours.length;
     });
   } catch (e) {
     console.error('Failed to load tours:', e);
@@ -312,11 +281,11 @@ function applyURLParams() {
   const dur  = params.get('duration');
 
   if (dest) {
-    const radio = document.querySelector(`input[name="destination"][value="${dest}"]`);
+    const radio = document.querySelector(`input[name="destination"][value="${CSS.escape(dest)}"]`);
     if (radio) radio.checked = true;
   }
   if (dur) {
-    const radio = document.querySelector(`input[name="duration"][value="${dur}"]`);
+    const radio = document.querySelector(`input[name="duration"][value="${CSS.escape(dur)}"]`);
     if (radio) radio.checked = true;
   }
   if (dest || dur) applyFilters();
