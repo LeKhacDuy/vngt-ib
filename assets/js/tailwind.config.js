@@ -1,6 +1,19 @@
 /* =============================================
    VNGroup Tourist - Tailwind Config (shared)
-   Used by all pages via CDN
+   ---------------------------------------------
+   Brand palette taken from the new logo: brick red #BC342E and
+   charcoal #404040, on warm cream neutrals. Same palette as
+   vngrouptourist.vn so both sites read as one brand.
+
+   This is the single source of colour for every page. Pages load
+   it with <script src="assets/js/tailwind.config.js"> right after
+   the Tailwind CDN script. Before this, each page carried its own
+   inline copy of the config, so changing a colour meant editing
+   eight files.
+
+   The Material-3 token names below are kept so existing classes
+   (bg-primary, text-on-surface-variant ...) keep working; only
+   their values changed.
    ============================================= */
 
 window.__VNGT_TAILWIND_CONFIG = {
@@ -8,57 +21,84 @@ window.__VNGT_TAILWIND_CONFIG = {
     theme: {
         extend: {
             colors: {
-                "on-tertiary-fixed": "#00494a",
-                "inverse-on-surface": "#9a9e9c",
-                "on-secondary": "#fff0e9",
-                "error-dim": "#9f0519",
-                "on-primary": "#caffdc",
-                "primary-fixed": "#7bfeb8",
-                "inverse-primary": "#7bfeb8",
-                "surface-container": "#e5e9e7",
-                "surface-container-lowest": "#ffffff",
-                "on-primary-fixed": "#004b2d",
-                "tertiary-fixed-dim": "#4aedef",
-                "primary-fixed-dim": "#6cefab",
-                "secondary-fixed-dim": "#ffb287",
-                "error-container": "#fb5151",
-                "surface-container-highest": "#d8dedc",
-                "primary-container": "#7bfeb8",
-                "on-primary-container": "#00603b",
-                "on-background": "#2b2f2e",
-                "primary-dim": "#005c38",
-                "inverse-surface": "#0b0f0e",
-                "on-error-container": "#570008",
-                "secondary-container": "#ffc5a6",
-                "outline-variant": "#aaaeac",
-                "outline": "#747876",
-                "secondary": "#964300",
-                "surface-bright": "#f4f7f5",
-                "surface-variant": "#d8dedc",
-                "on-tertiary": "#befeff",
-                "surface-container-low": "#eef2ef",
-                "secondary-fixed": "#ffc5a6",
-                "on-secondary-fixed-variant": "#853b00",
-                "tertiary-fixed": "#5dfbfe",
-                "on-surface-variant": "#585c5b",
-                "secondary-dim": "#843a00",
-                "error": "#b31b25",
-                "tertiary": "#006668",
-                "on-tertiary-fixed-variant": "#00686a",
-                "on-secondary-container": "#773400",
-                "surface-tint": "#006941",
-                "on-tertiary-container": "#005d5f",
-                "surface": "#f4f7f5",
-                "on-surface": "#2b2f2e",
-                "tertiary-container": "#5dfbfe",
-                "surface-container-high": "#dfe4e1",
-                "background": "#f4f7f5",
-                "on-primary-fixed-variant": "#006b43",
-                "on-secondary-fixed": "#592500",
-                "tertiary-dim": "#00595b",
-                "surface-dim": "#d0d6d3",
-                "on-error": "#ffefee",
-                "primary": "#006941"
+                /* --- Brand red: buttons, links, highlights --- */
+                "primary": "#BC342E",
+                "primary-dim": "#A32A24",
+                "on-primary": "#FFFFFF",
+                "primary-container": "#FCEFED",
+                "on-primary-container": "#8A221D",
+                /* Light rose: accent text and icons on dark photos and on red panels */
+                "primary-fixed": "#F6C3BC",
+                "primary-fixed-dim": "#EFA79E",
+                "on-primary-fixed": "#5C1612",
+                "on-primary-fixed-variant": "#8A221D",
+                "inverse-primary": "#F6C3BC",
+                "surface-tint": "#BC342E",
+
+                /* --- Deeper red: prices and eyebrow labels --- */
+                "secondary": "#A32A24",
+                "secondary-dim": "#8A221D",
+                "on-secondary": "#FFFFFF",
+                "secondary-container": "#F7DCD8",
+                "on-secondary-container": "#7A1E1A",
+                "secondary-fixed": "#F7DCD8",
+                "secondary-fixed-dim": "#EFC2BC",
+                "on-secondary-fixed": "#4A100D",
+                "on-secondary-fixed-variant": "#7A1E1A",
+
+                /* --- Green kept only as a meaning: verified, included, available.
+                       Same choice as vngrouptourist.vn — a red tick reads as an error. --- */
+                "tertiary": "#1F7A5C",
+                "tertiary-dim": "#186549",
+                "on-tertiary": "#FFFFFF",
+                "tertiary-container": "#E8F5EF",
+                "on-tertiary-container": "#145440",
+                "tertiary-fixed": "#E8F5EF",
+                "tertiary-fixed-dim": "#C9E8DA",
+                "on-tertiary-fixed": "#0B3628",
+                "on-tertiary-fixed-variant": "#145440",
+
+                /* --- Errors: deeper than the brand red so the two are not confused --- */
+                "error": "#A4161A",
+                "error-dim": "#8A1216",
+                "on-error": "#FFFFFF",
+                "error-container": "#FBE4E4",
+                "on-error-container": "#6B0E11",
+
+                /* --- Warm neutrals --- */
+                "background": "#FAF6F1",
+                "surface": "#FAF6F1",
+                "surface-bright": "#FFFCF8",
+                "surface-dim": "#E8DFD5",
+                "surface-variant": "#EFE7DD",
+                "surface-container-lowest": "#FFFFFF",
+                "surface-container-low": "#F5EFE8",
+                "surface-container": "#EFE7DD",
+                "surface-container-high": "#E8DDD2",
+                "surface-container-highest": "#E0D3C5",
+                "on-background": "#2A2622",
+                "on-surface": "#2A2622",
+                "on-surface-variant": "#5A524B",
+                "outline": "#8A8078",
+                "outline-variant": "#D9CCBE",
+                "inverse-surface": "#1C1815",
+                "inverse-on-surface": "#F2EAE2",
+
+                /* --- Plain names used where pages had hard-coded Tailwind greens/oranges --- */
+                "brand": {
+                    "DEFAULT": "#BC342E",
+                    "hover": "#A32A24",
+                    "press": "#8A221D",
+                    "tint": "#FCEFED",
+                    "light": "#F6C3BC"
+                },
+                "ink": {
+                    "DEFAULT": "#2A2622",
+                    "2": "#5A524B",
+                    "3": "#8A8078",
+                    "dark": "#1C1815"
+                },
+                "cream": "#FAF6F1"
             },
             fontFamily: {
                 "headline": ["Plus Jakarta Sans"],
@@ -75,7 +115,7 @@ window.__VNGT_TAILWIND_CONFIG = {
     }
 };
 
-// Apply tailwind config (must run before tailwind CDN parses)
+// Apply the config. This file must load AFTER the Tailwind CDN script.
 if (typeof tailwind !== 'undefined') {
     tailwind.config = window.__VNGT_TAILWIND_CONFIG;
 }

@@ -27,7 +27,7 @@
     background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #aaaeac;
+    background: #D9CCBE;
     border-radius: 10px;
 }
 .no-scrollbar::-webkit-scrollbar {

@@ -4,6 +4,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>VNGroup Tourist - Du lịch Inbound Việt Nam | Công ty lữ hành uy tín</title>
+<link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png"/>
+<link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon.png"/>
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"/>
+<meta name="theme-color" content="#BC342E"/>
 <meta name="description" content="VNGroup Tourist - Chuyên tổ chức tour du lịch inbound Việt Nam chất lượng cao. Khám phá Hà Nội, Hạ Long, Hội An, Cần Thơ, TP.HCM với hướng dẫn viên tiếng Anh chuyên nghiệp."/>
 <meta name="keywords" content="tour inbound Vietnam, du lịch Việt Nam, VNGroup Tourist, tour Hà Nội, tour Hạ Long, tour Hội An, tour Mekong Delta, tour TP HCM"/>
 <meta name="author" content="VNGroup Tourist"/>
@@ -25,75 +29,8 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-tertiary-fixed": "#00494a",
-              "inverse-on-surface": "#9a9e9c",
-              "on-secondary": "#fff0e9",
-              "error-dim": "#9f0519",
-              "on-primary": "#caffdc",
-              "primary-fixed": "#7bfeb8",
-              "inverse-primary": "#7bfeb8",
-              "surface-container": "#e5e9e7",
-              "surface-container-lowest": "#ffffff",
-              "on-primary-fixed": "#004b2d",
-              "tertiary-fixed-dim": "#4aedef",
-              "primary-fixed-dim": "#6cefab",
-              "secondary-fixed-dim": "#ffb287",
-              "error-container": "#fb5151",
-              "surface-container-highest": "#d8dedc",
-              "primary-container": "#7bfeb8",
-              "on-primary-container": "#00603b",
-              "on-background": "#2b2f2e",
-              "primary-dim": "#005c38",
-              "inverse-surface": "#0b0f0e",
-              "on-error-container": "#570008",
-              "secondary-container": "#ffc5a6",
-              "outline-variant": "#aaaeac",
-              "outline": "#747876",
-              "secondary": "#964300",
-              "surface-bright": "#f4f7f5",
-              "surface-variant": "#d8dedc",
-              "on-tertiary": "#befeff",
-              "surface-container-low": "#eef2ef",
-              "secondary-fixed": "#ffc5a6",
-              "on-secondary-fixed-variant": "#853b00",
-              "tertiary-fixed": "#5dfbfe",
-              "on-surface-variant": "#585c5b",
-              "secondary-dim": "#843a00",
-              "error": "#b31b25",
-              "tertiary": "#006668",
-              "on-tertiary-fixed-variant": "#00686a",
-              "on-secondary-container": "#773400",
-              "surface-tint": "#006941",
-              "on-tertiary-container": "#005d5f",
-              "surface": "#f4f7f5",
-              "on-surface": "#2b2f2e",
-              "tertiary-container": "#5dfbfe",
-              "surface-container-high": "#dfe4e1",
-              "background": "#f4f7f5",
-              "on-primary-fixed-variant": "#006b43",
-              "on-secondary-fixed": "#592500",
-              "tertiary-dim": "#00595b",
-              "surface-dim": "#d0d6d3",
-              "on-error": "#ffefee",
-              "primary": "#006941"
-            },
-            fontFamily: {
-              "headline": ["Plus Jakarta Sans"],
-              "body": ["Be Vietnam Pro"],
-              "label": ["Be Vietnam Pro"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
+
+<script src="assets/js/tailwind.config.js"></script>
 <link rel="stylesheet" href="assets/css/main.css"/>
 <style>
         .tonal-shift-no-border { border: none !important; }
@@ -102,36 +39,36 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar -->
 <!-- Header Component -->
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-4 md:px-8 py-3 z-50 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-lg shadow-[0_8px_24px_rgba(43,47,46,0.06)] flex justify-between items-center font-['Plus_Jakarta_Sans'] tracking-tight">
-<a href="index.html" style="text-decoration:none;"><div class="text-xl md:text-2xl font-extrabold tracking-tighter text-emerald-900 dark:text-emerald-50">VNGroup Tourist</div></a>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-4 md:px-8 py-3 z-50 bg-white/70 dark:bg-ink-dark/70 backdrop-blur-lg shadow-[0_8px_24px_rgba(42,38,34,0.06)] flex justify-between items-center font-['Plus_Jakarta_Sans'] tracking-tight">
+<a href="index.html" class="flex items-center shrink-0" aria-label="VNGroup Tourist home"><img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-8 md:h-10 w-auto"/></a>
 <div class="hidden md:flex items-center space-x-8">
-<a class="text-emerald-800 dark:text-emerald-200 font-medium hover:scale-105 hover:text-emerald-600 transition-all duration-300" href="destinations.html">Destinations</a>
-<a class="text-emerald-800 dark:text-emerald-200 font-medium hover:scale-105 hover:text-emerald-600 transition-all duration-300" href="tours.html">Tours</a>
-<a class="text-emerald-800 dark:text-emerald-200 font-medium hover:scale-105 hover:text-emerald-600 transition-all duration-300" href="about.html">About Us</a>
-<a class="text-emerald-800 dark:text-emerald-200 font-medium hover:scale-105 hover:text-emerald-600 transition-all duration-300" href="faqs.html">FAQs</a>
-<a class="text-emerald-800 dark:text-emerald-200 font-medium hover:scale-105 hover:text-emerald-600 transition-all duration-300" href="contact.html">Contact Us</a>
+<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="destinations.html">Destinations</a>
+<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="tours.html">Tours</a>
+<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="about.html">About Us</a>
+<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="faqs.html">FAQs</a>
+<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="contact.html">Contact Us</a>
 </div>
 <div class="flex items-center space-x-2 md:space-x-4">
-<span class="hidden lg:block text-emerald-800 dark:text-emerald-200 text-sm font-semibold tracking-wider">EN/USD</span>
+<span class="hidden lg:block text-ink dark:text-cream text-sm font-semibold tracking-wider">EN/USD</span>
 <a href="booking.html" class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-full font-bold text-sm md:text-base transition-transform scale-98 active:opacity-80 hover:scale-105">Book Now</a>
-<button id="mobile-menu-btn" class="md:hidden text-emerald-900 dark:text-emerald-50 focus:outline-none flex items-center p-1">
+<button id="mobile-menu-btn" class="md:hidden text-ink dark:text-cream focus:outline-none flex items-center p-1">
 <span class="material-symbols-outlined text-3xl" data-icon="menu">menu</span>
 </button>
 </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white/95 dark:bg-emerald-950/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 hidden opacity-0 transition-opacity duration-300">
-    <button id="close-menu-btn" class="absolute top-6 right-6 text-emerald-900 dark:text-emerald-50 p-2 focus:outline-none">
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white/95 dark:bg-ink-dark/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 hidden opacity-0 transition-opacity duration-300">
+    <button id="close-menu-btn" class="absolute top-6 right-6 text-ink dark:text-cream p-2 focus:outline-none">
         <span class="material-symbols-outlined text-4xl" data-icon="close">close</span>
     </button>
     <div class="flex flex-col items-center space-y-8">
-        <a href="index.html" class="text-3xl font-extrabold tracking-tighter text-emerald-900 mb-4" style="text-decoration:none;">VNGroup Tourist</a>
-        <a class="text-emerald-900 dark:text-emerald-50 text-2xl font-bold hover:text-primary transition-colors" href="destinations.html">Destinations</a>
-<a class="text-emerald-900 dark:text-emerald-50 text-2xl font-bold hover:text-primary transition-colors" href="tours.html">Tours</a>
-<a class="text-emerald-900 dark:text-emerald-50 text-2xl font-bold hover:text-primary transition-colors" href="about.html">About Us</a>
-<a class="text-emerald-900 dark:text-emerald-50 text-2xl font-bold hover:text-primary transition-colors" href="faqs.html">FAQs</a>
-<a class="text-emerald-900 dark:text-emerald-50 text-2xl font-bold hover:text-primary transition-colors" href="contact.html">Contact Us</a>
+        <a href="index.html" class="mb-4" aria-label="VNGroup Tourist home"><img src="assets/img/logo.png" alt="VNGroup Tourist" width="199" height="48" class="h-12 w-auto"/></a>
+        <a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="destinations.html">Destinations</a>
+<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="tours.html">Tours</a>
+<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="about.html">About Us</a>
+<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="faqs.html">FAQs</a>
+<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="contact.html">Contact Us</a>
     </div>
 </div>
 
@@ -258,7 +195,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
       const desc = (tour.highlights || '').split('\n')[0].replace(/^\d+\.\s*/, '').trim() || 'Khám phá Việt Nam cùng VNGroup Tourist.';
 
       const badge = tour.subcategories && tour.subcategories.length
-        ? `<div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-white" style="background:${tour.subcategories[0].color || '#006941'}CC">${tour.subcategories[0].name.toUpperCase()}</div>`
+        ? `<div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-white" style="background:${tour.subcategories[0].color || '#BC342E'}CC">${tour.subcategories[0].name.toUpperCase()}</div>`
         : `<div class="absolute top-4 left-4 bg-primary/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-on-primary">INBOUND</div>`;
 
       return `
@@ -388,51 +325,51 @@ document.getElementById('search-btn').addEventListener('click', function() {
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-[#eef2ef] dark:bg-emerald-950 w-full py-16 px-8 mt-20 font-['Be_Vietnam_Pro'] leading-relaxed">
+<footer class="bg-surface-container-low dark:bg-ink-dark w-full py-16 px-8 mt-20 font-['Be_Vietnam_Pro'] leading-relaxed">
 <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
 <div class="col-span-1 md:col-span-1">
-<div class="text-xl font-bold text-emerald-900 dark:text-emerald-50 mb-6">VNGroup Tourist</div>
-<p class="text-emerald-700 dark:text-emerald-300 text-sm mb-6">
+<img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-10 w-auto mb-6"/>
+<p class="text-ink-2 dark:text-brand-light text-sm mb-6">
                     We curate meaningful journeys through the heart of Vietnam, focusing on sustainable practices and deep cultural immersion.
                 </p>
 <div class="flex gap-4">
-<a class="w-8 h-8 rounded-full bg-emerald-900 flex items-center justify-center text-white hover:bg-orange-700 transition-colors" href="#">
+<a class="w-8 h-8 rounded-full bg-ink flex items-center justify-center text-white hover:bg-brand transition-colors" href="#">
 <span class="material-symbols-outlined text-sm" data-icon="public">public</span>
 </a>
-<a class="w-8 h-8 rounded-full bg-emerald-900 flex items-center justify-center text-white hover:bg-orange-700 transition-colors" href="#">
+<a class="w-8 h-8 rounded-full bg-ink flex items-center justify-center text-white hover:bg-brand transition-colors" href="#">
 <span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
 </a>
 </div>
 </div>
 <div class="space-y-4">
-<h6 class="text-emerald-900 dark:text-emerald-50 font-bold uppercase tracking-widest text-xs">Explore</h6>
+<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Explore</h6>
 <ul class="space-y-2">
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="destinations.html">Destinations</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="tours.html">Featured Tours</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Luxury Cruises</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Custom Trips</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="destinations.html">Destinations</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="tours.html">Featured Tours</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Luxury Cruises</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Custom Trips</a></li>
 </ul>
 </div>
 <div class="space-y-4">
-<h6 class="text-emerald-900 dark:text-emerald-50 font-bold uppercase tracking-widest text-xs">Company</h6>
+<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Company</h6>
 <ul class="space-y-2">
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Sustainability</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Career</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Media Kit</a></li>
-<li><a class="text-emerald-700 dark:text-emerald-300 hover:text-orange-700 transition-colors duration-200" href="#">Privacy Policy</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Sustainability</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Career</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Media Kit</a></li>
+<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Privacy Policy</a></li>
 </ul>
 </div>
 <div class="space-y-4">
-<h6 class="text-emerald-900 dark:text-emerald-50 font-bold uppercase tracking-widest text-xs">Newsletter</h6>
-<p class="text-emerald-700 dark:text-emerald-300 text-sm">Join our list for exclusive travel stories and early access to tours.</p>
+<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Newsletter</h6>
+<p class="text-ink-2 dark:text-brand-light text-sm">Join our list for exclusive travel stories and early access to tours.</p>
 <div class="flex gap-2">
 <input class="bg-white border-none rounded-full px-4 py-2 flex-1 text-sm focus:ring-2 focus:ring-primary" placeholder="Your email" type="email"/>
 <button class="bg-primary text-on-primary p-2 rounded-full px-4 hover:scale-105 transition-transform">Join</button>
 </div>
 </div>
 </div>
-<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-emerald-900/10 text-center">
-<p class="text-emerald-700 dark:text-emerald-300 text-xs opacity-70">© 2024 VNGroup Tourist. Editorial Gateway to the East.</p>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-ink/10 text-center">
+<p class="text-ink-2 dark:text-brand-light text-xs opacity-70">© 2024 VNGroup Tourist. Editorial Gateway to the East.</p>
 </div>
 </footer>
 </body></html>
