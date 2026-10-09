@@ -2,24 +2,27 @@
 # Copy to /etc/nginx/sites-available/vngt-ib, adjust the domain and paths,
 # link it into sites-enabled, then: nginx -t && systemctl reload nginx
 #
-# Before HTTPS works the certificate must exist:
-#   certbot certonly --webroot -w /code/vngt-ib/dist -d vngrouptourist.com -d www.vngrouptourist.com
+# Before HTTPS works the certificate must exist. The challenge files get their own
+# folder because the hourly build replaces dist/:
+#   mkdir -p /var/www/acme
+#   certbot certonly --webroot -w /var/www/acme -d vngrouptourist.com -d www.vngrouptourist.com \
+#     --deploy-hook "systemctl reload nginx"
+# This is the config running on 103.90.227.39.
 
 # Cache rules: photos and versioned CSS/JS rarely change, pages always revalidate.
 map $uri $vngt_ib_cache {
     ~^/img/            "public, max-age=2592000, immutable";
-    ~^/assets/img/     "public, max-age=604800";
     ~^/assets/         "public, max-age=604800";
     default            "no-cache";
 }
 
 server {
-    listen 80;
-    listen [::]:80;
-    server_name vngrouptourist.com www.vngrouptourist.com;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name vngrouptourist.com www.vngrouptourist.com _;
 
     # certbot renewals
-    location /.well-known/acme-challenge/ { root /code/vngt-ib/dist; }
+    location ^~ /.well-known/acme-challenge/ { root /var/www/acme; }
     location / { return 301 https://vngrouptourist.com$request_uri; }
 }
 
@@ -29,15 +32,19 @@ server {
     server_name www.vngrouptourist.com;
     ssl_certificate     /etc/letsencrypt/live/vngrouptourist.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/vngrouptourist.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
     return 301 https://vngrouptourist.com$request_uri;
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
     server_name vngrouptourist.com;
     ssl_certificate     /etc/letsencrypt/live/vngrouptourist.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/vngrouptourist.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 1d;
 
     root /code/vngt-ib/dist;
     index index.html;

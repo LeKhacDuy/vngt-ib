@@ -40,7 +40,12 @@ Tỷ giá quy đổi VND → USD nằm ở `VND_PER_USD` trong `assets/js/tour-u
 
 ## Deploy lên VPS
 
-1. DNS: trỏ `vngrouptourist.com` và `www` (bản ghi A) về IP VPS. **Giữ nguyên bản ghi MX** (email Google Workspace).
+Đang chạy tại https://vngrouptourist.com trên server `103.90.227.39` (code ở `/code/vngt-ib`).
+Cron trên server `git pull` nhánh `main` rồi build lại mỗi giờ (phút thứ 7), nên **push lên `main` là lên web trong vòng 1 tiếng**.
+
+Cài mới từ đầu:
+
+1. DNS (quản lý ở iNET): bản ghi A `@` trỏ về IP server, `www` là CNAME về `vngrouptourist.com`. **Giữ nguyên bản ghi MX** (email Google Workspace).
 2. Trên VPS:
    ```bash
    git clone https://github.com/LeKhacDuy/vngt-ib.git /code/vngt-ib
@@ -48,7 +53,7 @@ Tỷ giá quy đổi VND → USD nằm ở `VND_PER_USD` trong `assets/js/tour-u
    printf 'SITE_URL=https://vngrouptourist.com\n' > .env
    ./deploy/rebuild.sh
    ```
-3. nginx: chép `deploy/nginx.conf.example`, lấy chứng chỉ SSL bằng certbot (lệnh ở đầu file).
+3. nginx: chép `deploy/nginx.conf.example`, lấy chứng chỉ SSL bằng certbot (lệnh ở đầu file; chứng chỉ tự gia hạn qua `certbot.timer`).
 4. Cron build lại mỗi giờ để tour mới/sửa giá tự cập nhật:
    ```
    0 * * * * /code/vngt-ib/deploy/rebuild.sh >> /var/log/vngt-ib-build.log 2>&1
