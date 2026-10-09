@@ -1,23 +1,24 @@
 /* =============================================
-   VNGroup Tourist - Tailwind Config (shared)
+   VNGroup Tourist - Tailwind config
    ---------------------------------------------
+   Built by `npm run build` into dist/assets/css/site.css. The site used
+   to load the Tailwind Play CDN and compile CSS in the browser on every
+   visit (419 KB of JavaScript, unstyled flash); Tailwind does not
+   support that in production.
+
    Brand palette taken from the new logo: brick red #BC342E and
    charcoal #404040, on warm cream neutrals. Same palette as
-   vngrouptourist.vn so both sites read as one brand.
-
-   This is the single source of colour for every page. Pages load
-   it with <script src="assets/js/tailwind.config.js"> right after
-   the Tailwind CDN script. Before this, each page carried its own
-   inline copy of the config, so changing a colour meant editing
-   eight files.
-
-   The Material-3 token names below are kept so existing classes
-   (bg-primary, text-on-surface-variant ...) keep working; only
-   their values changed.
+   vngrouptourist.vn so both sites read as one brand. The Material-3
+   token names are kept so existing classes (bg-primary,
+   text-on-surface-variant ...) keep working.
    ============================================= */
 
-window.__VNGT_TAILWIND_CONFIG = {
-    darkMode: "class",
+import forms from '@tailwindcss/forms';
+import containerQueries from '@tailwindcss/container-queries';
+
+export default {
+    // Classes also live in JavaScript templates (cards, tour pages).
+    content: ['./*.html', './assets/js/**/*.js', './scripts/**/*.mjs'],
     theme: {
         extend: {
             colors: {
@@ -100,10 +101,11 @@ window.__VNGT_TAILWIND_CONFIG = {
                 },
                 "cream": "#FAF6F1"
             },
+
             fontFamily: {
-                "headline": ["Plus Jakarta Sans"],
-                "body": ["Be Vietnam Pro"],
-                "label": ["Be Vietnam Pro"]
+                "headline": ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+                "body": ["Be Vietnam Pro", "system-ui", "sans-serif"],
+                "label": ["Be Vietnam Pro", "system-ui", "sans-serif"]
             },
             borderRadius: {
                 "DEFAULT": "0.25rem",
@@ -112,10 +114,6 @@ window.__VNGT_TAILWIND_CONFIG = {
                 "full": "9999px"
             }
         }
-    }
+    },
+    plugins: [forms, containerQueries],
 };
-
-// Apply the config. This file must load AFTER the Tailwind CDN script.
-if (typeof tailwind !== 'undefined') {
-    tailwind.config = window.__VNGT_TAILWIND_CONFIG;
-}

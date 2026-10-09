@@ -1,0 +1,62 @@
+# nginx site for the English site, serving the build output (dist/).
+# Copy to /etc/nginx/sites-available/vngt-ib, adjust the domain and paths,
+# link it into sites-enabled, then: nginx -t && systemctl reload nginx
+#
+# Before HTTPS works the certificate must exist:
+#   certbot certonly --webroot -w /code/vngt-ib/dist -d vngrouptourist.com -d www.vngrouptourist.com
+
+# Cache rules: photos and versioned CSS/JS rarely change, pages always revalidate.
+map $uri $vngt_ib_cache {
+    ~^/img/            "public, max-age=2592000, immutable";
+    ~^/assets/img/     "public, max-age=604800";
+    ~^/assets/         "public, max-age=604800";
+    default            "no-cache";
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name vngrouptourist.com www.vngrouptourist.com;
+
+    # certbot renewals
+    location /.well-known/acme-challenge/ { root /code/vngt-ib/dist; }
+    location / { return 301 https://vngrouptourist.com$request_uri; }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.vngrouptourist.com;
+    ssl_certificate     /etc/letsencrypt/live/vngrouptourist.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/vngrouptourist.com/privkey.pem;
+    return 301 https://vngrouptourist.com$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name vngrouptourist.com;
+    ssl_certificate     /etc/letsencrypt/live/vngrouptourist.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/vngrouptourist.com/privkey.pem;
+
+    root /code/vngt-ib/dist;
+    index index.html;
+    error_page 404 /404.html;
+
+    gzip on;
+    gzip_vary on;
+    gzip_comp_level 5;
+    gzip_min_length 1024;
+    gzip_types text/css application/javascript application/json image/svg+xml text/xml text/plain;
+
+    # One place for headers: add_header inside a location would drop these.
+    add_header Cache-Control $vngt_ib_cache always;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

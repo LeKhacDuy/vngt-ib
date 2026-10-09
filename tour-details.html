@@ -4,84 +4,87 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Tour Details | VNGroup Tourist</title>
-<link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png"/>
-<link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon.png"/>
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png"/>
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/img/favicon.png"/>
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png"/>
 <meta name="theme-color" content="#BC342E"/>
 <meta name="description" content="See the itinerary and price, and book your Vietnam tour with VNGroup Tourist. Professional English-speaking guides."/>
 <meta name="keywords" content="tour details, book Vietnam tour, Vietnam tours, VNGroup Tourist, tour itinerary"/>
 <meta name="author" content="VNGroup Tourist"/>
-<meta name="robots" content="index, follow"/>
+<!-- This file is the template for /tours/<slug>/ pages (scripts/build.mjs). Served as is, it only
+     shows tours added after the last build, so it stays out of search results. -->
+<meta name="robots" content="noindex, follow"/>
 <link rel="canonical" href="https://vngrouptourist.com/tour-details.html"/>
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="VNGroup Tourist"/>
 <meta property="og:title" content="Tour Details | VNGroup Tourist"/>
 <meta property="og:description" content="See the itinerary and price, and book an unforgettable Vietnam tour."/>
-<meta property="og:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
+<meta property="og:image" content="https://vngrouptourist.com/assets/img/og-default.jpg"/>
 <meta property="og:url" content="https://vngrouptourist.com/tour-details.html"/>
 <meta property="og:locale" content="en_US"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Tour Details | VNGroup Tourist"/>
 <meta name="twitter:description" content="See the itinerary and book your Vietnam tour."/>
-<meta name="twitter:image" content="https://vngrouptourist.com/assets/images/og-tours.jpg"/>
+<meta name="twitter:image" content="https://vngrouptourist.com/assets/img/og-default.jpg"/>
 <!-- JSON-LD TouristTrip (filled in per tour by the script below) -->
 <script type="application/ld+json" id="tour-schema">{"@context":"https://schema.org","@type":"TouristTrip","touristType":"International tourists","provider":{"@type":"TravelAgency","name":"VNGroup Tourist","url":"https://vngrouptourist.com"}}</script>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
-<script src="assets/js/tailwind.config.js"></script>
-<script src="assets/js/tour-utils.js"></script>
-<link rel="stylesheet" href="assets/css/main.css"/>
+<script src="/assets/js/tour-utils.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/site.css"/>
 </head>
 <body class="bg-background text-on-surface font-body antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-primary focus:font-bold focus:px-5 focus:py-3 focus:rounded-full focus:shadow-lg">Skip to content</a>
 <!-- TopNavBar -->
 <!-- Header Component -->
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-4 md:px-8 py-3 z-50 bg-white/70 dark:bg-ink-dark/70 backdrop-blur-lg shadow-[0_8px_24px_rgba(42,38,34,0.06)] flex justify-between items-center font-['Plus_Jakarta_Sans'] tracking-tight">
-<a href="index.html" class="flex items-center shrink-0" aria-label="VNGroup Tourist home"><img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-8 md:h-10 w-auto"/></a>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-4 md:px-8 py-3 z-50 bg-white/70 backdrop-blur-lg shadow-[0_8px_24px_rgba(42,38,34,0.06)] flex justify-between items-center font-['Plus_Jakarta_Sans'] tracking-tight">
+<a href="/" class="flex items-center shrink-0" aria-label="VNGroup Tourist home"><img src="/assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-8 md:h-10 w-auto"/></a>
 <div class="hidden md:flex items-center space-x-8">
-<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="destinations.html">Destinations</a>
-<a class="text-brand dark:text-brand-light relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-brand after:rounded-full font-medium transition-all duration-300 hover:scale-105" href="tours.html">Tours</a>
-<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="about.html">About Us</a>
-<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="faqs.html">FAQs</a>
-<a class="text-ink dark:text-cream font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="contact.html">Contact Us</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/destinations.html">Destinations</a>
+<a class="text-brand relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-brand after:rounded-full font-medium transition-all duration-300 hover:scale-105" href="/tours.html">Tours</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/about.html">About Us</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/faqs.html">FAQs</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/contact.html">Contact Us</a>
 </div>
 <div class="flex items-center space-x-2 md:space-x-4">
-<span class="hidden lg:block text-ink dark:text-cream text-sm font-semibold tracking-wider">EN/USD</span>
-<a href="booking.html" class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-full font-bold text-sm md:text-base transition-transform scale-98 active:opacity-80 hover:scale-105">Book Now</a>
-<button id="mobile-menu-btn" class="md:hidden text-ink dark:text-cream focus:outline-none flex items-center p-1">
-<span class="material-symbols-outlined text-3xl" data-icon="menu">menu</span>
+<a href="/booking.html" class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-full font-bold text-sm md:text-base transition-transform scale-98 active:opacity-80 hover:scale-105">Book Now</a>
+<button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-ink flex items-center p-1 rounded-full focus-visible:ring-2 focus-visible:ring-primary">
+<span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
 </button>
 </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white/95 dark:bg-ink-dark/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 hidden opacity-0 transition-opacity duration-300">
-    <button id="close-menu-btn" class="absolute top-6 right-6 text-ink dark:text-cream p-2 focus:outline-none">
-        <span class="material-symbols-outlined text-4xl" data-icon="close">close</span>
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" class="fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8 hidden opacity-0 transition-opacity duration-300">
+    <button id="close-menu-btn" type="button" aria-label="Close menu" class="absolute top-6 right-6 text-ink p-2 rounded-full focus-visible:ring-2 focus-visible:ring-primary">
+        <span class="material-symbols-outlined text-4xl" aria-hidden="true">close</span>
     </button>
     <div class="flex flex-col items-center space-y-8">
-        <a href="index.html" class="mb-4" aria-label="VNGroup Tourist home"><img src="assets/img/logo.png" alt="VNGroup Tourist" width="199" height="48" class="h-12 w-auto"/></a>
-        <a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="destinations.html">Destinations</a>
-<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="tours.html">Tours</a>
-<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="about.html">About Us</a>
-<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="faqs.html">FAQs</a>
-<a class="text-ink dark:text-cream text-2xl font-bold hover:text-primary transition-colors" href="contact.html">Contact Us</a>
+        <a href="/" class="mb-4" aria-label="VNGroup Tourist home"><img src="/assets/img/logo.png" alt="VNGroup Tourist" width="199" height="48" class="h-12 w-auto"/></a>
+        <a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/destinations.html">Destinations</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/tours.html">Tours</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/about.html">About Us</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/faqs.html">FAQs</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/contact.html">Contact Us</a>
     </div>
 </div>
 
-<script src="assets/js/nav.js"></script>
+<script src="/assets/js/nav.js"></script>
 <!-- End Header Component -->
-<main class="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+<main id="main" class="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
 <!-- Breadcrumb -->
 <div class="pt-4 pb-2">
-  <a href="tours.html" class="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary transition-colors font-medium">
+  <a href="/tours.html" class="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary transition-colors font-medium">
     <span class="material-symbols-outlined text-sm">arrow_back</span> Back to all tours
   </a>
 </div>
 
+<!-- build:loading -->
 <!-- Loading skeleton -->
 <div id="detail-skeleton" class="space-y-8">
   <div class="animate-pulse bg-surface-container-low rounded-3xl h-[500px] w-full"></div>
@@ -100,252 +103,76 @@
 <!-- Error state -->
 <div id="detail-error" class="hidden text-center py-32">
   <span class="material-symbols-outlined text-6xl text-outline-variant">error_outline</span>
-  <p class="mt-4 text-on-surface-variant font-medium text-lg">We could not find this tour. <a href="tours.html" class="text-primary font-bold">See all tours</a></p>
+  <p class="mt-4 text-on-surface-variant font-medium text-lg">We could not find this tour. <a href="/tours.html" class="text-primary font-bold">See all tours</a></p>
 </div>
 
-<!-- Dynamic content injected here -->
-<div id="detail-content" class="hidden"></div>
+<!-- /build:loading -->
+<div id="detail-content" class="hidden"><!-- build:content --></div>
 </main>
+<!-- build:client -->
+<script src="/assets/js/tour-page.js"></script>
 <script>
+// Tours added after the last build have no static page yet; render them from the API.
 (async function () {
-  const API_BASE = VNGT.API_BASE;
   const SITE     = 'https://vngrouptourist.com';
-  const params  = new URLSearchParams(window.location.search);
-  const tourId  = params.get('id');
-
+  const tourId   = new URLSearchParams(window.location.search).get('id');
   const skeleton = document.getElementById('detail-skeleton');
   const errEl    = document.getElementById('detail-error');
   const content  = document.getElementById('detail-content');
-
-  if (!tourId) { showError(); return; }
-
-  try {
-    const res  = await fetch(`${API_BASE}/api/tours/${encodeURIComponent(tourId)}`);
-    if (!res.ok) throw new Error('Not found');
-    const json = await res.json();
-    const t    = json.data;
-
-    const name      = VNGT.tidy(t.name);
-    const dest      = VNGT.destinationName(t.destination) || 'Vietnam';
-    const transport = VNGT.tidy(t.transport);
-    const duration  = Number(t.duration) || 1;
-    // Day trips carry the API's default "3 sao" but have no hotel.
-    const hotels    = duration > 1 ? VNGT.hotels(t.hotel_rating) : '';
-    const price     = VNGT.price(t.web_price);
-    const hero      = VNGT.image(t.thumbnail, 1200, 600);
-    const pageUrl   = `${SITE}/tour-details.html?id=${t.id}`;
-
-    // Update page title
-    document.title = `${name} | VNGroup Tourist`;
-
-    // ── Dynamic SEO update ──────────────────────────────────
-    const ogImage = t.thumbnail ? hero : `${SITE}/assets/images/og-tours.jpg`;
-    const seoDesc = VNGT.seoDescription(t);
-    const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
-    setMeta('meta[name="description"]', seoDesc);
-    setMeta('meta[property="og:title"]', `${name} | VNGroup Tourist`);
-    setMeta('meta[property="og:description"]', seoDesc);
-    setMeta('meta[property="og:image"]', ogImage);
-    setMeta('meta[property="og:url"]', pageUrl);
-    setMeta('meta[name="twitter:title"]', `${name} | VNGroup Tourist`);
-    setMeta('meta[name="twitter:description"]', seoDesc);
-    setMeta('meta[name="twitter:image"]', ogImage);
-    // Canonical
-    let canon = document.querySelector('link[rel="canonical"]');
-    if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
-    canon.href = pageUrl;
-    // JSON-LD TouristTrip
-    const schema = document.getElementById('tour-schema');
-    if (schema) schema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'TouristTrip',
-      'name': name,
-      'description': seoDesc,
-      'image': ogImage,
-      'url': pageUrl,
-      ...(t.web_price ? { 'offers': { '@type': 'Offer', 'price': Math.round(t.web_price / 25000), 'priceCurrency': 'USD', 'availability': 'https://schema.org/InStock' } } : {}),
-      'provider': { '@type': 'TravelAgency', 'name': 'VNGroup Tourist', 'url': SITE },
-      'touristType': 'International tourists'
-    });
-    // ─────────────────────────────────────────────────────────
-
-    // Gallery
-    const galleryImgs = t.gallery_images || [];
-    const galleryHTML = galleryImgs.length
-      ? `<section class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12 h-[360px]">
-          <div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-lg">
-            <img src="${API_BASE + galleryImgs[0]}" alt="${VNGT.esc(name)}, photo 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='${hero}'"/>
-          </div>
-          ${(galleryImgs.slice(1,3)).map((g, i) => `
-          <div class="rounded-xl overflow-hidden shadow-lg">
-            <img src="${API_BASE + g}" alt="${VNGT.esc(name)}, photo ${i + 2}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='${hero}'"/>
-          </div>`).join('')}
-        </section>`
-      : '';
-
-    // Itinerary: morning / afternoon / evening of each day
-    const filled = v => v && v.trim() && v.trim() !== '.';
-    const PARTS = [['morning', 'Morning', 'text-primary'], ['noon', 'Afternoon', 'text-secondary'], ['evening', 'Evening', 'text-tertiary']];
-    const itin = t.itineraries || [];
-    const itinHTML = itin.length ? itin.map(day => {
-      const parts = PARTS.map(([key, label, color]) => {
-        const p = day[key];
-        if (!p || !filled(p.description)) return '';
-        const title = filled(p.title) ? ` · ${VNGT.esc(VNGT.tidy(p.title))}` : '';
-        return `<div class="mb-3"><span class="text-[10px] font-bold ${color} uppercase tracking-widest block mb-1">${label}${title}</span><p class="text-on-surface-variant leading-relaxed text-sm">${VNGT.esc(p.description.trim()).replace(/\r?\n/g,'<br>')}</p></div>`;
-      }).join('');
-
-      return `<div class="group relative pl-12 pb-10">
-        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-primary-container flex items-center justify-center z-10">
-          <span class="text-xs font-bold text-on-primary-container">${day.day_number}</span>
-        </div>
-        <div class="absolute left-4 top-8 bottom-0 w-[2px] bg-primary-container/30 group-last:bg-transparent"></div>
-        <h3 class="font-headline text-lg font-bold text-on-surface mb-3">${filled(day.title) ? VNGT.esc(VNGT.tidy(day.title)) : 'Day ' + day.day_number}</h3>
-        ${parts || '<p class="text-on-surface-variant text-sm">Full details are sent with your booking confirmation.</p>'}
-      </div>`;
-    }).join('') : '<p class="text-on-surface-variant">The day-by-day itinerary is available on request. <a href="contact.html" class="text-primary font-bold">Contact us</a>.</p>';
-
-    const highlightsHTML = VNGT.formatText(t.highlights, { skipHeading: /^(tour )?highlights?$/i });
-    const notesHTML      = VNGT.formatText(t.special_notes);
-    const policyHTML     = VNGT.formatText(t.cancellation_policy);
-    const textBox = html => `<div class="bg-surface-container-low rounded-2xl p-6 text-sm text-on-surface-variant leading-relaxed">${html}</div>`;
-
-    const tags = VNGT.tagBadges(t, 2);
-
-    content.innerHTML = `
-    <!-- Hero -->
-    <section class="relative h-[500px] min-h-[400px] w-full rounded-3xl overflow-hidden mb-10">
-      <img src="${hero}" alt="${VNGT.esc(name)}" class="absolute inset-0 w-full h-full object-cover" onerror="${VNGT.fallback(1200, 600)}"/>
-      <div class="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-black/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full">
-        <div class="flex flex-wrap gap-2 mb-4">
-          ${tags}
-          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">${VNGT.days(duration)}</span>
-        </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white font-headline leading-tight max-w-3xl mb-5">${VNGT.esc(name)}</h1>
-        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-white/90">
-          ${transport ? `<div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary-fixed">directions_car</span>
-            <span class="font-medium text-sm">${VNGT.esc(transport)}</span>
-          </div>` : ''}
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary-fixed">location_on</span>
-            <span class="font-medium text-sm">${VNGT.esc(dest)}</span>
-          </div>
-          ${hotels ? `<div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary-fixed">hotel</span>
-            <span class="font-medium text-sm">${hotels}</span>
-          </div>` : ''}
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery -->
-    ${galleryHTML}
-
-    <!-- Grid layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
-
-      <!-- Left column -->
-      <div class="lg:col-span-8 space-y-14 min-w-0">
-
-        <!-- Highlights -->
-        ${highlightsHTML ? `<section>
-          <h2 class="font-headline text-2xl font-bold mb-5">Highlights</h2>
-          <div class="text-sm text-on-surface-variant leading-relaxed">${highlightsHTML}</div>
-        </section>` : ''}
-
-        <!-- Itinerary -->
-        <section>
-          <h2 class="font-headline text-2xl font-bold mb-8">Itinerary</h2>
-          <div class="space-y-2">${itinHTML}</div>
-        </section>
-
-        <!-- Inclusions and notes -->
-        ${notesHTML ? `<section>
-          <h2 class="font-headline text-2xl font-bold mb-5">What's included &amp; good to know</h2>
-          ${textBox(notesHTML)}
-        </section>` : ''}
-
-        <!-- Payment and cancellation, as entered for this tour -->
-        ${policyHTML ? `<section id="terms" class="scroll-mt-28">
-          <h2 class="font-headline text-2xl font-bold mb-5">Payment &amp; cancellation</h2>
-          ${textBox(policyHTML)}
-        </section>` : ''}
-      </div>
-
-      <!-- Sticky sidebar -->
-      <aside class="lg:col-span-4">
-        <div class="sticky top-24 space-y-6">
-          <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_32px_64px_-16px_rgba(188,52,46,0.10)] border border-outline-variant/10">
-            <div class="flex justify-between items-baseline mb-6">
-              <div>
-                <span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest">${VNGT.priceLabel(t.web_price)}</span>
-                <p class="text-3xl font-headline font-extrabold text-primary mt-1">${price}</p>
-              </div>
-              ${t.web_price ? '<span class="text-sm text-on-surface-variant font-medium">per person</span>' : ''}
-            </div>
-            <div class="space-y-4 mb-6">
-              <div class="flex items-center gap-3 text-sm">
-                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                <span class="text-on-surface-variant">Duration: <strong>${VNGT.days(duration)}</strong></span>
-              </div>
-              <div class="flex items-center gap-3 text-sm">
-                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                <span class="text-on-surface-variant">Destination: <strong>${VNGT.esc(dest)}</strong></span>
-              </div>
-              ${transport ? `<div class="flex items-center gap-3 text-sm">
-                <span class="material-symbols-outlined text-primary text-lg">directions_car</span>
-                <span class="text-on-surface-variant">Transport: <strong>${VNGT.esc(transport)}</strong></span>
-              </div>` : ''}
-              ${hotels ? `<div class="flex items-center gap-3 text-sm">
-                <span class="material-symbols-outlined text-primary text-lg">hotel</span>
-                <span class="text-on-surface-variant">Hotels: <strong>${hotels.replace(' hotels', '')}</strong></span>
-              </div>` : ''}
-            </div>
-            <a href="booking.html?tour_id=${t.id}&tour_code=${encodeURIComponent(t.tour_code || '')}"
-               class="block w-full py-4 bg-primary text-on-primary rounded-full font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20 text-center">
-              Book this tour
-            </a>
-            <p class="text-center text-xs text-on-surface-variant mt-4">
-              ${policyHTML
-                ? '<a href="#terms" class="underline underline-offset-2 hover:text-primary">Payment &amp; cancellation terms</a>'
-                : '<a href="faqs.html" class="underline underline-offset-2 hover:text-primary">Cancellation policy</a>'}
-            </p>
-          </div>
-
-          ${t.tour_code ? `<div class="bg-secondary-container/20 border border-secondary/20 p-5 rounded-2xl flex items-start gap-3">
-            <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">confirmation_number</span>
-            <div>
-              <p class="font-bold text-on-secondary-container text-sm">Tour code</p>
-              <p class="text-on-secondary-container/80 text-lg font-bold">${VNGT.esc(t.tour_code)}</p>
-            </div>
-          </div>` : ''}
-        </div>
-      </aside>
-    </div>`;
-
-    skeleton.classList.add('hidden');
-    content.classList.remove('hidden');
-
-  } catch (e) {
-    console.error('Tour load failed:', e);
-    showError();
-  }
 
   function showError() {
     skeleton.classList.add('hidden');
     errEl.classList.remove('hidden');
   }
+  if (!tourId) { showError(); return; }
+
+  // Most tours have a built page: send visitors (and old links) there.
+  try {
+    const known = (await VNGT.loadTours()).find(t => String(t.id) === tourId);
+    if (known && known.url) { window.location.replace(known.url); return; }
+  } catch (e) { /* fall through to the API */ }
+
+  try {
+    const res = await fetch(`${VNGT.API_BASE}/api/tours/${encodeURIComponent(tourId)}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const t = (await res.json()).data;
+    // The API also serves the Vietnamese site's domestic and outbound tours.
+    if (!t || t.is_hidden || (t.category && t.category.code !== 'inbound')) throw new Error('Not an inbound tour');
+
+    const page = VNGT.renderTour(t, {
+      siteUrl: SITE,
+      pageUrl: `${SITE}/tour-details.html?id=${t.id}`,
+      image: (kind, path) => VNGT.image(path, 1200, 600),
+    });
+
+    document.title = page.title;
+    const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+    setMeta('meta[name="description"]', page.description);
+    setMeta('meta[property="og:title"]', page.title);
+    setMeta('meta[property="og:description"]', page.description);
+    setMeta('meta[property="og:image"]', page.ogImage);
+    setMeta('meta[name="twitter:title"]', page.title);
+    setMeta('meta[name="twitter:description"]', page.description);
+    setMeta('meta[name="twitter:image"]', page.ogImage);
+    document.getElementById('tour-schema').textContent = JSON.stringify(page.schema);
+
+    content.innerHTML = page.html;
+    skeleton.classList.add('hidden');
+    content.classList.remove('hidden');
+  } catch (e) {
+    console.error('Tour load failed:', e);
+    showError();
+  }
 })();
 </script>
+<!-- /build:client -->
 
 <!-- Footer -->
 <footer class="bg-surface-container-low w-full pt-16 pb-10 px-6 md:px-8 mt-20 leading-relaxed">
 <!-- Company details match vngrouptourist.vn. Keep the two sites in step. -->
 <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 <div>
-<img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-10 w-auto mb-6"/>
+<img loading="lazy" decoding="async" src="/assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-10 w-auto mb-6"/>
 <p class="text-ink-2 text-sm mb-6">Tours across Vietnam with local guides, from VNGroup Tourist, a Ho Chi Minh City travel company founded in 2023.</p>
 <div class="flex flex-wrap gap-2 text-xs font-semibold">
 <a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.facebook.com/vngrouptourist" target="_blank" rel="noopener">Facebook</a>
@@ -356,17 +183,17 @@
 <div class="space-y-4">
 <h6 class="text-ink font-bold uppercase tracking-widest text-xs">Explore</h6>
 <ul class="space-y-2 text-sm">
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="tours.html">All Tours</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="destinations.html">Destinations</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="booking.html">Book a Tour</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="faqs.html">FAQs</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/tours.html">All Tours</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/destinations.html">Destinations</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/booking.html">Book a Tour</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/faqs.html">FAQs</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <h6 class="text-ink font-bold uppercase tracking-widest text-xs">Company</h6>
 <ul class="space-y-2 text-sm">
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="about.html">About Us</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="contact.html">Contact Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/about.html">About Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/contact.html">Contact Us</a></li>
 <li><a class="text-ink-2 hover:text-brand transition-colors" href="https://m.me/vngrouptourist" target="_blank" rel="noopener">Message us on Messenger</a></li>
 <li><a class="text-ink-2 hover:text-brand transition-colors" href="https://vngrouptourist.vn" target="_blank" rel="noopener" hreflang="vi">Vietnamese website</a></li>
 </ul>
@@ -381,8 +208,9 @@
 </ul>
 </div>
 </div>
-<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 text-xs text-ink-2">
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 text-xs text-ink-2 flex flex-col sm:flex-row gap-3 justify-between">
 <p>© 2026 VNGroup Tourist Co., Ltd. All rights reserved.</p>
+<p class="flex gap-4"><a class="hover:text-brand" href="/privacy.html">Privacy Policy</a><a class="hover:text-brand" href="/terms.html">Booking Terms</a></p>
 </div>
 </footer>
 </body></html>

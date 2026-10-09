@@ -1,6 +1,6 @@
 /**
  * VNGroup Tourist - Shared Navigation Script
- * Handles: mobile menu toggle, active nav highlighting
+ * Handles: mobile menu toggle, navbar shadow on scroll
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,22 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu    = document.getElementById('mobile-menu');
 
     if (mobileMenuBtn && closeMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
+        const openMenu = () => {
             mobileMenu.classList.remove('hidden');
             setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
-        });
-
-        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            closeMenuBtn.focus();
+        };
+        const closeMenu = () => {
             mobileMenu.classList.add('opacity-0');
             setTimeout(() => mobileMenu.classList.add('hidden'), 300);
-        });
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.focus();
+        };
 
-        // Close on backdrop click
+        mobileMenuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+
+        // Close on backdrop click or Escape
         mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.add('opacity-0');
-                setTimeout(() => mobileMenu.classList.add('hidden'), 300);
-            }
+            if (e.target === mobileMenu) closeMenu();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) closeMenu();
         });
     }
 

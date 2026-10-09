@@ -1,0 +1,19 @@
+{
+  "name": "vngt-ib",
+  "private": true,
+  "description": "VNGroup Tourist English site: static pages built from the tour API",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check-links.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@tailwindcss/container-queries": "0.1.1",
+    "@tailwindcss/forms": "0.5.10",
+    "sharp": "0.34.2",
+    "tailwindcss": "3.4.17"
+  }
+}

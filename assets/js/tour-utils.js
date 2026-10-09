@@ -17,20 +17,27 @@
 
 window.VNGT = (function () {
     const API_BASE = 'https://lekhacduy.io.vn';
+    // Prices are stored in VND. Change the rate here; the build and the pages both read it.
     const VND_PER_USD = 25000;
 
     /* ---------- Loading ---------- */
 
+    const getJSON = url => fetch(url).then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + url);
+        return res.json();
+    });
+
+    // The build writes a trimmed copy of the tour list with optimised images
+    // (/assets/data/tours.json), so pages do not wait on the API or depend on
+    // its CORS settings. Straight from the API only when that file is missing,
+    // e.g. when opening the source pages without building.
     // One request per page even when several scripts need the list.
     let toursPromise = null;
     function loadTours() {
         if (!toursPromise) {
-            toursPromise = fetch(API_BASE + '/api/tours?category_code=inbound')
-                .then(res => {
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return res.json();
-                })
-                .then(json => json.data || []);
+            toursPromise = getJSON('/assets/data/tours.json')
+                .then(json => json.tours)
+                .catch(() => getJSON(API_BASE + '/api/tours?category_code=inbound').then(json => json.data || []));
         }
         return toursPromise;
     }
@@ -158,8 +165,11 @@ window.VNGT = (function () {
     }
 
     // Prices are stored in VND; the site shows rounded USD.
+    function usd(vnd) {
+        return Math.round(vnd / VND_PER_USD);
+    }
     function price(vnd) {
-        return vnd ? '$' + Math.round(vnd / VND_PER_USD).toLocaleString('en-US') : 'On request';
+        return vnd ? '$' + usd(vnd).toLocaleString('en-US') : 'On request';
     }
     function priceLabel(vnd) {
         return vnd ? 'From' : 'Price';
@@ -215,8 +225,10 @@ window.VNGT = (function () {
         return 'data:image/svg+xml,' + encodeURIComponent(svg);
     }
 
+    // Paths from the build ("/img/...") are local; anything else is an API upload.
     function image(path, w, h) {
-        return path ? API_BASE + path : placeholder(w || 600, h || 400);
+        if (!path) return placeholder(w || 600, h || 400);
+        return /^(https?:|\/img\/)/.test(path) ? path : API_BASE + path;
     }
 
     // For onerror="" attributes. The SVG is URI-encoded, so it carries no quotes.
@@ -257,7 +269,7 @@ window.VNGT = (function () {
             if (BULLET.test(l)) {
                 const mark = NO_MARK.test(l) ? 'no' : YES_MARK.test(l) ? 'yes' : mode;
                 l = l.replace(BULLET, '').replace(LEADING_EMOJI, '').trim();
-                if (l) blocks.push({ type: 'li', text: l, mark });
+                if (l && !SEPARATOR.test(l)) blocks.push({ type: 'li', text: l, mark });
                 return;
             }
 
@@ -298,7 +310,7 @@ window.VNGT = (function () {
         blocks.forEach(b => {
             if (b.type === 'li') {
                 if (!open) { html += '<ul class="space-y-1.5 mb-4">'; open = true; }
-                html += `<li class="flex items-start gap-2.5">${ICON[b.mark] || ICON.plain}<span>${itemHTML(b.text)}</span></li>`;
+                html += `<li class="flex items-start gap-2.5">${ICON[b.mark] || ICON.plain}<span class="min-w-0 break-words">${itemHTML(b.text)}</span></li>`;
                 return;
             }
             if (open) { html += '</ul>'; open = false; }
@@ -342,12 +354,119 @@ window.VNGT = (function () {
             .filter(Boolean).join(' ');
     }
 
+    /* ---------- Tour links and cards ---------- */
+
+    // "/tours/cu-chi-tunnels-and-black-virgin-mountain-253/". The id at the end keeps
+    // the link working when a tour is renamed: 404.html sends unknown slugs to the
+    // tour by id.
+    function slug(t) {
+        let words = stripAccents(tidy(t.name)).toLowerCase()
+            .replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        // Long names: cut at a word boundary.
+        if (words.length > 70) words = words.slice(0, 71).replace(/-[^-]*$/, '');
+        return (words ? words + '-' : 'tour-') + t.id;
+    }
+
+    // Built tours have a static page; newer ones fall back to tour-details.html.
+    function tourUrl(t) {
+        return t.url || '/tour-details.html?id=' + encodeURIComponent(t.id);
+    }
+
+    // Card for the tours list (tours.html and the build's pre-rendered list).
+    function card(tour) {
+        const name      = esc(tidy(tour.name));
+        const dest      = esc(destinationName(tour.destination));
+        const transport = esc(tidy(tour.transport));
+        const badges    = tagBadges(tour, 2);
+
+        return `
+  <a href="${tourUrl(tour)}" class="group block bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(188,52,46,0.10)]">
+    <div class="relative h-56 overflow-hidden bg-surface-container">
+      <img src="${image(tour.thumbnail)}" alt="${name}" loading="lazy" decoding="async"
+           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+           onerror="${fallback()}"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+      ${badges ? `<div class="absolute top-3 left-3 flex gap-2 flex-wrap">${badges}</div>` : ''}
+      ${dest ? `<div class="absolute bottom-3 left-3">
+        <span class="bg-black/50 text-white text-[10px] font-semibold px-2 py-1 rounded-full flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs" aria-hidden="true">location_on</span>${dest}
+        </span>
+      </div>` : ''}
+    </div>
+    <div class="p-5">
+      <h3 class="font-headline text-base font-bold group-hover:text-primary transition-colors mb-3 line-clamp-2 leading-snug">${name}</h3>
+      <div class="flex items-center gap-4 text-on-surface-variant text-xs mb-4">
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm" aria-hidden="true">schedule</span>
+          <span>${days(tour.duration)}</span>
+        </div>
+        ${transport ? `<div class="flex items-center gap-1 min-w-0">
+          <span class="material-symbols-outlined text-sm" aria-hidden="true">directions_car</span>
+          <span class="truncate max-w-[180px]">${transport}</span>
+        </div>` : ''}
+      </div>
+      <div class="flex items-center justify-between pt-3 border-t border-outline-variant/15">
+        <div>
+          <span class="text-xs text-on-surface-variant font-medium block">${priceLabel(tour.web_price)}</span>
+          <span class="text-base font-extrabold text-primary">${price(tour.web_price)}</span>
+        </div>
+        <span class="bg-surface-container-low text-primary font-bold px-4 py-2 rounded-full text-xs group-hover:bg-primary group-hover:text-on-primary transition-all">View details</span>
+      </div>
+    </div>
+  </a>`;
+    }
+
+    // Card for the homepage's featured tours.
+    function featuredCard(tour) {
+        const name   = esc(tidy(tour.name));
+        const dest   = destinationName(tour.destination) || 'Vietnam';
+        const desc   = tour.summary || sentences(tour.highlights)[0] || 'Explore Vietnam with VNGroup Tourist.';
+        const badges = tagBadges(tour, 1);
+        return `
+      <a href="${tourUrl(tour)}" class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col">
+        <div class="relative h-72 overflow-hidden rounded-t-xl bg-surface-container">
+          <img src="${image(tour.thumbnail)}" alt="${name}" loading="lazy" decoding="async"
+               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+               onerror="${fallback()}"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          ${badges ? `<div class="absolute top-4 left-4 flex gap-2">${badges}</div>` : ''}
+          <div class="absolute bottom-3 right-3 bg-black/50 text-white text-[10px] font-semibold px-2 py-1 rounded-full">
+            ${days(tour.duration)}
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="font-headline text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">${name}</h3>
+          <p class="text-on-surface-variant text-sm mb-4 line-clamp-2 flex-1">${esc(desc)}</p>
+          <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+            <div class="text-secondary font-bold">
+              <span class="text-xs block text-on-surface-variant font-normal">${priceLabel(tour.web_price)}</span>
+              <span class="text-base">${price(tour.web_price)}</span>
+            </div>
+            <span class="text-xs text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm" aria-hidden="true">location_on</span>${esc(dest)}
+            </span>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    // Popular tours with a price and a photo first. The API's own order starts with
+    // private quotes that have neither, which is a poor first impression.
+    function featured(tours, n) {
+        const ready = tours.filter(t => t.web_price && t.thumbnail);
+        return [
+            ...ready.filter(t => hasTag(t, 'hot')),
+            ...ready.filter(t => !hasTag(t, 'hot')),
+        ].slice(0, n || 3);
+    }
+
     return {
         API_BASE, loadTours,
         destinationCode, destinationName, destinationsOf, inDestination,
         hasTag, tagBadges,
-        esc, days, price, priceLabel, hotels, tidy,
-        image, fallback,
+        esc, days, usd, price, priceLabel, hotels, tidy,
+        image, fallback, stripAccents,
+        slug, tourUrl, card, featuredCard, featured,
         formatText, sentences, cut, seoDescription,
     };
 })();
