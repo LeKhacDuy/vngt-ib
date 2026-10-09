@@ -245,7 +245,9 @@ async function main() {
         return html;
     }
 
-    // 6. Pages
+    // 6. Pages. Each one is written as <name>/index.html so its address is /<name>/ on any
+    // web server; old /<name>.html links are redirected by nginx (deploy/nginx.conf.example).
+    const outFile = f => (f === 'index.html' || f === '404.html' ? f : f.replace(/\.html$/, '/index.html'));
     for (const f of [...PAGES, ...OTHER_PAGES]) {
         let html = await read(f);
         if (f === 'index.html') {
@@ -256,7 +258,8 @@ async function main() {
             html = between(html, '<!-- build:cards -->', '<!-- /build:cards -->', snapshot.map(VNGT.card).join(''));
             html = between(html, '<!-- build:count -->', '<!-- /build:count -->', String(snapshot.length));
         }
-        await fs.writeFile(path.join(TMP, f), finish(html));
+        await fs.mkdir(path.dirname(path.join(TMP, outFile(f))), { recursive: true });
+        await fs.writeFile(path.join(TMP, outFile(f)), finish(html));
     }
 
     // 7. One page per tour
@@ -304,7 +307,7 @@ async function main() {
     // 8. Sitemap and robots
     const today = new Date().toISOString().slice(0, 10);
     const urls = [
-        ...PAGES.map(p => (p === 'index.html' ? '/' : '/' + p)),
+        ...PAGES.map(p => (p === 'index.html' ? '/' : '/' + p.replace(/\.html$/, '/'))),
         ...tours.map(t => t.url),
     ];
     await fs.writeFile(path.join(TMP, 'sitemap.xml'),

@@ -62,7 +62,7 @@
             '@type': 'BreadcrumbList',
             'itemListElement': [
                 { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': opts.siteUrl + '/' },
-                { '@type': 'ListItem', 'position': 2, 'name': 'Tours', 'item': opts.siteUrl + '/tours.html' },
+                { '@type': 'ListItem', 'position': 2, 'name': 'Tours', 'item': opts.siteUrl + '/tours/' },
                 { '@type': 'ListItem', 'position': 3, 'name': name, 'item': opts.pageUrl },
             ],
         };
@@ -99,7 +99,7 @@
         <h3 class="font-headline text-lg font-bold text-on-surface mb-3">${filled(day.title) ? esc(VNGT.tidy(day.title)) : 'Day ' + esc(day.day_number)}</h3>
         ${parts || '<p class="text-on-surface-variant text-sm">Full details are sent with your booking confirmation.</p>'}
       </div>`;
-        }).join('') : '<p class="text-on-surface-variant">The day-by-day itinerary is available on request. <a href="/contact.html" class="text-primary font-bold">Contact us</a>.</p>';
+        }).join('') : '<p class="text-on-surface-variant">The day-by-day itinerary is available on request. <a href="/contact/" class="text-primary font-bold">Contact us</a>.</p>';
 
         const highlightsHTML = VNGT.formatText(t.highlights, { skipHeading: /^(tour )?highlights?$/i });
         const notesHTML = VNGT.formatText(t.special_notes);
@@ -198,14 +198,14 @@
                 <span class="text-on-surface-variant">Hotels: <strong>${hotels.replace(' hotels', '')}</strong></span>
               </div>` : ''}
             </div>
-            <a href="/booking.html?tour_id=${esc(t.id)}"
+            <a href="/booking/?tour_id=${esc(t.id)}"
                class="block w-full py-4 bg-primary text-on-primary rounded-full font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20 text-center">
               Book this tour
             </a>
             <p class="text-center text-xs text-on-surface-variant mt-4">
               ${policyHTML
                 ? '<a href="#terms" class="underline underline-offset-2 hover:text-primary">Payment &amp; cancellation terms</a>'
-                : '<a href="/faqs.html#booking" class="underline underline-offset-2 hover:text-primary">Cancellation policy</a>'}
+                : '<a href="/faqs/#booking" class="underline underline-offset-2 hover:text-primary">Cancellation policy</a>'}
             </p>
           </div>
 

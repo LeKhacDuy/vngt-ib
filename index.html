@@ -43,14 +43,14 @@
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-4 md:px-8 py-3 z-50 bg-white/70 backdrop-blur-lg shadow-[0_8px_24px_rgba(42,38,34,0.06)] flex justify-between items-center font-['Plus_Jakarta_Sans'] tracking-tight">
 <a href="/" class="flex items-center shrink-0" aria-label="VNGroup Tourist home"><img src="/assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-8 md:h-10 w-auto"/></a>
 <div class="hidden md:flex items-center space-x-8">
-<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/destinations.html">Destinations</a>
-<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/tours.html">Tours</a>
-<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/about.html">About Us</a>
-<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/faqs.html">FAQs</a>
-<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/contact.html">Contact Us</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/destinations/">Destinations</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/tours/">Tours</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/about/">About Us</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/faqs/">FAQs</a>
+<a class="text-ink font-medium hover:scale-105 hover:text-brand transition-all duration-300" href="/contact/">Contact Us</a>
 </div>
 <div class="flex items-center space-x-2 md:space-x-4">
-<a href="/booking.html" class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-full font-bold text-sm md:text-base transition-transform scale-98 active:opacity-80 hover:scale-105">Book Now</a>
+<a href="/booking/" class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-full font-bold text-sm md:text-base transition-transform scale-98 active:opacity-80 hover:scale-105">Book Now</a>
 <button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-ink flex items-center p-1 rounded-full focus-visible:ring-2 focus-visible:ring-primary">
 <span class="material-symbols-outlined text-3xl" aria-hidden="true">menu</span>
 </button>
@@ -64,11 +64,11 @@
     </button>
     <div class="flex flex-col items-center space-y-8">
         <a href="/" class="mb-4" aria-label="VNGroup Tourist home"><img src="/assets/img/logo.png" alt="VNGroup Tourist" width="199" height="48" class="h-12 w-auto"/></a>
-        <a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/destinations.html">Destinations</a>
-<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/tours.html">Tours</a>
-<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/about.html">About Us</a>
-<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/faqs.html">FAQs</a>
-<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/contact.html">Contact Us</a>
+        <a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/destinations/">Destinations</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/tours/">Tours</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/about/">About Us</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/faqs/">FAQs</a>
+<a class="text-ink text-2xl font-bold hover:text-primary transition-colors" href="/contact/">Contact Us</a>
     </div>
 </div>
 
@@ -139,7 +139,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
   const params = new URLSearchParams();
   if (dest) params.set('destination', dest);
   if (dur && dur !== 'all') params.set('duration', dur);
-  window.location.href = '/tours.html' + (params.toString() ? '?' + params.toString() : '');
+  window.location.href = '/tours/' + (params.toString() ? '?' + params.toString() : '');
 });
 </script>
 </div>
@@ -151,7 +151,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 <h2 class="text-primary font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Curated Expeditions</h2>
 <p class="text-on-surface-variant text-lg leading-relaxed">Hand-picked journeys that balance legendary landmarks with hidden local gems.</p>
 </div>
-<a class="group flex items-center font-bold text-secondary gap-2" href="/tours.html">
+<a class="group flex items-center font-bold text-secondary gap-2" href="/tours/">
                 View all tours 
                 <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
 </a>
@@ -187,7 +187,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 <h2 class="text-primary font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-16 text-center">Where we travel</h2>
 <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-[800px] md:h-[600px]">
 <!-- Ninh Binh -->
-<a href="/tours.html?destination=inbound_mienbac" class="block md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl">
+<a href="/tours/?destination=inbound_mienbac" class="block md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl">
 <img loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Trang An, Ninh Binh" src="/assets/img/places/trang-an-ninh-binh.webp"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
 <div class="absolute bottom-8 left-8 text-white">
@@ -196,7 +196,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 </div>
 </a>
 <!-- Hoi An -->
-<a href="/tours.html?destination=inbound_mientrung" class="block md:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl">
+<a href="/tours/?destination=inbound_mientrung" class="block md:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Hoi An ancient town with silk lanterns" loading="lazy" src="/assets/img/places/hoi-an-lanterns.webp"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
@@ -205,7 +205,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 </div>
 </a>
 <!-- Mekong Delta -->
-<a href="/tours.html?destination=inbound_miennam" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
+<a href="/tours/?destination=inbound_miennam" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Cai Rang floating market in the Mekong Delta" loading="lazy" src="/assets/img/places/cai-rang-floating-market.webp"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
@@ -213,7 +213,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 </div>
 </a>
 <!-- Phu Quoc -->
-<a href="/tours.html?destination=inbound_phuquoc" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
+<a href="/tours/?destination=inbound_phuquoc" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Sunset on a Phu Quoc beach" loading="lazy" src="/assets/img/places/phu-quoc-sunset-beach.webp"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
@@ -269,17 +269,17 @@ document.getElementById('search-btn').addEventListener('click', function() {
 <div class="space-y-4">
 <h6 class="text-ink font-bold uppercase tracking-widest text-xs">Explore</h6>
 <ul class="space-y-2 text-sm">
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/tours.html">All Tours</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/destinations.html">Destinations</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/booking.html">Book a Tour</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/faqs.html">FAQs</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/tours/">All Tours</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/destinations/">Destinations</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/booking/">Book a Tour</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/faqs/">FAQs</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <h6 class="text-ink font-bold uppercase tracking-widest text-xs">Company</h6>
 <ul class="space-y-2 text-sm">
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/about.html">About Us</a></li>
-<li><a class="text-ink-2 hover:text-brand transition-colors" href="/contact.html">Contact Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/about/">About Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="/contact/">Contact Us</a></li>
 <li><a class="text-ink-2 hover:text-brand transition-colors" href="https://m.me/vngrouptourist" target="_blank" rel="noopener">Message us on Messenger</a></li>
 <li><a class="text-ink-2 hover:text-brand transition-colors" href="https://vngrouptourist.vn" target="_blank" rel="noopener" hreflang="vi">Vietnamese website</a></li>
 </ul>
@@ -296,7 +296,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 </div>
 <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 text-xs text-ink-2 flex flex-col sm:flex-row gap-3 justify-between">
 <p>© 2026 VNGroup Tourist Co., Ltd. All rights reserved.</p>
-<p class="flex gap-4"><a class="hover:text-brand" href="/privacy.html">Privacy Policy</a><a class="hover:text-brand" href="/terms.html">Booking Terms</a></p>
+<p class="flex gap-4"><a class="hover:text-brand" href="/privacy/">Privacy Policy</a><a class="hover:text-brand" href="/terms/">Booking Terms</a></p>
 </div>
 </footer>
 </body></html>

@@ -369,7 +369,7 @@ window.VNGT = (function () {
 
     // Built tours have a static page; newer ones fall back to tour-details.html.
     function tourUrl(t) {
-        return t.url || '/tour-details.html?id=' + encodeURIComponent(t.id);
+        return t.url || '/tour-details/?id=' + encodeURIComponent(t.id);
     }
 
     // Card for the tours list (tours.html and the build's pre-rendered list).

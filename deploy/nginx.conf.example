@@ -50,6 +50,13 @@ server {
     index index.html;
     error_page 404 /404.html;
 
+    # Pages live at /<name>/; send old /<name>.html links there. Matched on the request
+    # line, so nginx's own internal /<name>/index.html lookups are not redirected.
+    if ($request_uri ~ "^/index\.html(\?|$)") { return 301 /$is_args$args; }
+    if ($request_uri ~ "^/(tours|destinations|about|faqs|contact|booking|privacy|terms|tour-details)\.html(\?|$)") {
+        return 301 /$1/$is_args$args;
+    }
+
     gzip on;
     gzip_vary on;
     gzip_comp_level 5;
