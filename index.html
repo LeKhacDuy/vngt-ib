@@ -127,7 +127,7 @@ VNGT.loadTours().then(tours => {
   VNGT.destinationsOf(tours).forEach(d => {
     const opt = document.createElement('option');
     opt.value = d.code;
-    opt.textContent = d.name;
+    opt.textContent = (d.parent ? '\u2003' : '') + d.name;
     sel.appendChild(opt);
   });
 }).catch(e => console.warn('Could not load destinations', e));
@@ -223,139 +223,117 @@ document.getElementById('search-btn').addEventListener('click', function() {
 <!-- Interactive Destination Gallery (Bento-style) -->
 <section class="bg-surface-container-low py-24 overflow-hidden">
 <div class="max-w-7xl mx-auto px-8">
-<h2 class="text-primary font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-16 text-center">Unforgettable Vistas</h2>
+<h2 class="text-primary font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-16 text-center">Where we travel</h2>
 <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-[800px] md:h-[600px]">
 <!-- Hue -->
-<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="The Imperial City of Hue reflecting in the water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjh7IhTebeKfc8_q4TJI8BRDo_Wz8BYeNZHK7xiw05hzLa4oGsQnZUqhqqRBYeQoZu3T3b7DFc2c3WVvP3e4-2qZQOg6TbCDfokoHAEx0GTMU5j2aIZWyn2DxcFF7K5e9eg42GIDbxhdx_U3kx5q5hO9FDsc1BRnxrsFqKJ3tue7M76rk7LwizNxFtgbPBGyMwahQKTZ0r4qouiKyeWPBqLPp_xs8H5h68dVbKJ6klF4yNczlbldxUGmHvrJ7KCz8eu2RNYfijWJw"/>
+<a href="tours.html?destination=inbound_mientrung" class="block md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="The Imperial City of Hue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjh7IhTebeKfc8_q4TJI8BRDo_Wz8BYeNZHK7xiw05hzLa4oGsQnZUqhqqRBYeQoZu3T3b7DFc2c3WVvP3e4-2qZQOg6TbCDfokoHAEx0GTMU5j2aIZWyn2DxcFF7K5e9eg42GIDbxhdx_U3kx5q5hO9FDsc1BRnxrsFqKJ3tue7M76rk7LwizNxFtgbPBGyMwahQKTZ0r4qouiKyeWPBqLPp_xs8H5h68dVbKJ6klF4yNczlbldxUGmHvrJ7KCz8eu2RNYfijWJw"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
 <div class="absolute bottom-8 left-8 text-white">
 <h4 class="text-3xl font-headline font-bold mb-2">Hue</h4>
 <p class="text-white/80 max-w-xs">Imperial grandeur and the whispering history of emperors.</p>
 </div>
-</div>
+</a>
 <!-- Hoi An -->
-<div class="md:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="Night view of Hoi An ancient town with colorful silk lanterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ7Xgp-fVKZ-wRVTT6Ps2rq6ufd1VjzL6NTfzB6lWXAnunTs0nbigStxqA94pzYKh9lv4qZ362_c0hYx7AecfQWLlaL-DbmY5oWnnWAMiDttS1zWcEgaPL-jDrTKGq6ST6cjsJPv2R1MqQtLKFjVEXYMASK1FPMX1Xk9xyTh5Y1L5Cyb-tQiCkUbQeO2L1si24rEnn128ns8RnFQvw_UNAYpaV13ERYYQR1GhthZMaTe_Y2t68auI1-cpC3AdZuQ4LcoChe4tHsvk"/>
+<a href="tours.html?destination=inbound_mientrung" class="block md:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Hoi An ancient town with silk lanterns" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ7Xgp-fVKZ-wRVTT6Ps2rq6ufd1VjzL6NTfzB6lWXAnunTs0nbigStxqA94pzYKh9lv4qZ362_c0hYx7AecfQWLlaL-DbmY5oWnnWAMiDttS1zWcEgaPL-jDrTKGq6ST6cjsJPv2R1MqQtLKFjVEXYMASK1FPMX1Xk9xyTh5Y1L5Cyb-tQiCkUbQeO2L1si24rEnn128ns8RnFQvw_UNAYpaV13ERYYQR1GhthZMaTe_Y2t68auI1-cpC3AdZuQ4LcoChe4tHsvk"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
 <h4 class="text-2xl font-headline font-bold mb-1">Hoi An</h4>
 <p class="text-white/80 text-sm">Timeless charm illuminated by silk lanterns.</p>
 </div>
-</div>
-<!-- Da Lat -->
-<div class="md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="French colonial architecture in the misty hills of Da Lat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQyeVWinNEHzyZrTBoHeP7gcMnLxyNrQkVouKp5xh4Ofev2NTe6nyatEci8cmEVwC7KvfOi2rXTQsygWzGnQmNpwk-3Sc1NM9ddDoA3ljGeJz98V1g0PcsfnGQPqTZpQYzlW7zFtm2484U351w3choVU2QIXL0KgoHs5fEI0XDeVww4mUxR3ji4lEFEOam6_M5bNEJwFfJt-avUXyASu39uk8vTlq3Tw1awg4aut5x5wRUbKrjcd6_syjjdUHoGUASn1wThRsPsak"/>
+</a>
+<!-- Mekong Delta (photo from our Mekong Delta tour) -->
+<a href="tours.html?destination=inbound_miennam" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Cai Rang floating market in the Mekong Delta" loading="lazy" src="https://lekhacduy.io.vn/upload/tour/20260526041241_img_1747728735976_o_1irmc07n51sa21tisoshhc4snhd.jpg"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
-<h4 class="text-xl font-headline font-bold">Da Lat</h4>
+<h4 class="text-xl font-headline font-bold">Mekong Delta</h4>
 </div>
-</div>
-<!-- Hidden Gem (Phu Quoc) -->
-<div class="md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="White sand beach and turquoise water of Phu Quoc island" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4qFD4gWaGudpyp9d_9RXKS4esgq5xx7WEyQFS6KO5sGIFgcDebHDSuSl9XAmU6IN0r_R8wgmqKBNOhIbL6Efx-bJLcZ8ET-SF7rlXfuiABwETvs1dD_HguWq2VjVerudwaXacdVEacHhtZadE-DKp1Cw-KCXfHn9GOmd9tOr90JKGmYMfn6D_7Qt5m03ICuJgag13JaqLnw2BL2JXWxt6rheQjXmwCKlHRQ8WiUjYlFix01Qi0IcFOFWnAafyz9D3ZMzPmKlcl_U"/>
+</a>
+<!-- Phu Quoc -->
+<a href="tours.html?destination=inbound_phuquoc" class="block md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Beach on Phu Quoc island" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4qFD4gWaGudpyp9d_9RXKS4esgq5xx7WEyQFS6KO5sGIFgcDebHDSuSl9XAmU6IN0r_R8wgmqKBNOhIbL6Efx-bJLcZ8ET-SF7rlXfuiABwETvs1dD_HguWq2VjVerudwaXacdVEacHhtZadE-DKp1Cw-KCXfHn9GOmd9tOr90JKGmYMfn6D_7Qt5m03ICuJgag13JaqLnw2BL2JXWxt6rheQjXmwCKlHRQ8WiUjYlFix01Qi0IcFOFWnAafyz9D3ZMzPmKlcl_U"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity"></div>
 <div class="absolute bottom-6 left-6 text-white">
 <h4 class="text-xl font-headline font-bold">Phu Quoc</h4>
 </div>
-</div>
+</a>
 </div>
 </div>
 </section>
-<!-- Testimonials -->
-<section class="py-24 max-w-7xl mx-auto px-8">
+<!-- Why us: figures from vngrouptourist.vn and the tour data, not invented reviews -->
+<section class="py-24 max-w-7xl mx-auto px-6 md:px-8">
 <div class="text-center mb-16">
-<h2 class="text-primary font-headline text-4xl font-extrabold mb-4">Voices of the Journey</h2>
-<p class="text-on-surface-variant max-w-xl mx-auto">Stories from travelers who discovered their own Vietnam through our eyes.</p>
+<h2 class="text-primary font-headline text-4xl font-extrabold mb-4">Why travel with VNGroup Tourist</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">A Ho Chi Minh City travel company since 2023, running tours from the north to the south of Vietnam.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10 relative">
-<span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-4 opacity-50" data-icon="format_quote">format_quote</span>
-<p class="text-on-surface italic mb-8 relative z-10">"VNGroup Tourist didn't just show us the sights; they showed us the heart of the country. Every meal, every village stop felt authentic and intentional."</p>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Portrait of Sarah from Australia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6k3VuI1sTWmBbTNCe6kVK3cC1uLClz48tK-beaJ0JTo41JxZVi7lfzs14kEf9ynBDn32NKVP8tbA7oEVEvnrsR_UgjqSYxajhs29EXXr7qECtRv5rt8cVQag595_AwaIE6amYHGEe2mdQjHewcVzag-34OdFf9Y_a9fnOYlW3z0Xl2A8G1GYSYp_wPFg6r6ovGXHosMw6s8_G0RRtQ-1wL21w06DE2Gg8Mofgvbd3EYW5BLpmioyTeFTtiuzW4rafkPfrz0eMBZ8"/>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<p class="font-headline text-4xl font-extrabold text-primary">3,000+</p>
+<p class="mt-2 font-bold text-on-surface">customers</p>
+<p class="mt-2 text-sm text-on-surface-variant">served since we launched in 2023.</p>
 </div>
-<div>
-<h5 class="font-bold">Sarah Jenkins</h5>
-<p class="text-sm text-on-surface-variant">Australia</p>
+<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<p class="font-headline text-4xl font-extrabold text-primary">900+</p>
+<p class="mt-2 font-bold text-on-surface">group tours</p>
+<p class="mt-2 text-sm text-on-surface-variant">for families, friends and companies.</p>
 </div>
+<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl">record_voice_over</span>
+<p class="mt-2 font-bold text-on-surface">English-speaking guides</p>
+<p class="mt-2 text-sm text-on-surface-variant">Local guides on our tours, other languages on request.</p>
 </div>
-</div>
-<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10 relative">
-<span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-4 opacity-50" data-icon="format_quote">format_quote</span>
-<p class="text-on-surface italic mb-8 relative z-10">"The Ha Long Bay cruise was the highlight of our 20-year anniversary. Impeccable service and breathtaking views I'll never forget."</p>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Portrait of David from United Kingdom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWl08a52TPdHiXEQCuKnsx9JkK7tfq3QuGHqQJqrw1RcdbHPjHvQbbqBkBpadmtdyRKT_iTx8DH3ZDRagI08Z7yKi7av4oYvciU4PXm_-NK5nNQI76eZPWe5m7mkHsinuPUGYwLsmzFm-DE95OGDH9slrBPLqPgNsTwT6E8eSCMF_lsxVe9ViOU03Her50zVyoatucCFLEJiMUJfeN1_pTde2Jryl_hBpL7kVKdSN0ECFPSBIlKEVwRM8hXPgeMe-kVzokrpIbTpY"/>
-</div>
-<div>
-<h5 class="font-bold">David Miller</h5>
-<p class="text-sm text-on-surface-variant">United Kingdom</p>
-</div>
-</div>
-</div>
-<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10 relative">
-<span class="material-symbols-outlined text-secondary-container text-6xl absolute -top-4 -left-4 opacity-50" data-icon="format_quote">format_quote</span>
-<p class="text-on-surface italic mb-8 relative z-10">"Professional, safe, and deeply insightful. As a solo traveler, I felt completely taken care of while still having the freedom to explore."</p>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Portrait of Elena from Canada" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI_debI2UBx5t04MOgqYcZT3oIWUMuspqmFAWaOPNeDx2NMS0Oyb12kBZy17w00mLseDw6vttluL-Td6_VTVxyGVkcLrNISU5ngH76FEiXNXkCp-jj_jSI1vh5YJOOG-MPAUyrRrNh0kW4g7OvgJc4WzLAkUfYRg8V9_UYjzQUuT7fJvD_o5nGJxJxtynv2EuaZzd8BiTKn3j5d2VdK-PzTecLeq9zif6OzmZI-beEhy6C9PAWU7yHkS6UJ23XspM5gaOzbrSAEfY"/>
-</div>
-<div>
-<h5 class="font-bold">Elena Rodriguez</h5>
-<p class="text-sm text-on-surface-variant">Canada</p>
-</div>
-</div>
+<div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl">hail</span>
+<p class="mt-2 font-bold text-on-surface">Hotel pick-up</p>
+<p class="mt-2 text-sm text-on-surface-variant">Included on most day tours from central Ho Chi Minh City.</p>
 </div>
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-surface-container-low dark:bg-ink-dark w-full py-16 px-8 mt-20 font-['Be_Vietnam_Pro'] leading-relaxed">
-<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-<div class="col-span-1 md:col-span-1">
+<footer class="bg-surface-container-low w-full pt-16 pb-10 px-6 md:px-8 mt-20 leading-relaxed">
+<!-- Company details match vngrouptourist.vn. Keep the two sites in step. -->
+<div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+<div>
 <img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-10 w-auto mb-6"/>
-<p class="text-ink-2 dark:text-brand-light text-sm mb-6">
-                    We curate meaningful journeys through the heart of Vietnam, focusing on sustainable practices and deep cultural immersion.
-                </p>
-<div class="flex gap-4">
-<a class="w-8 h-8 rounded-full bg-ink flex items-center justify-center text-white hover:bg-brand transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
-</a>
-<a class="w-8 h-8 rounded-full bg-ink flex items-center justify-center text-white hover:bg-brand transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
-</a>
+<p class="text-ink-2 text-sm mb-6">Tours across Vietnam with local guides, from VNGroup Tourist, a Ho Chi Minh City travel company founded in 2023.</p>
+<div class="flex flex-wrap gap-2 text-xs font-semibold">
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.facebook.com/vngrouptourist" target="_blank" rel="noopener">Facebook</a>
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.youtube.com/@DuLichVNGroupTourist" target="_blank" rel="noopener">YouTube</a>
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.tiktok.com/@dulichvngrouptourist" target="_blank" rel="noopener">TikTok</a>
 </div>
 </div>
 <div class="space-y-4">
-<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Explore</h6>
-<ul class="space-y-2">
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="destinations.html">Destinations</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="tours.html">Featured Tours</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Luxury Cruises</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Custom Trips</a></li>
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Explore</h6>
+<ul class="space-y-2 text-sm">
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="tours.html">All Tours</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="destinations.html">Destinations</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="booking.html">Book a Tour</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="faqs.html">FAQs</a></li>
 </ul>
 </div>
 <div class="space-y-4">
-<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Company</h6>
-<ul class="space-y-2">
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Sustainability</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Career</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Media Kit</a></li>
-<li><a class="text-ink-2 dark:text-brand-light hover:text-brand transition-colors duration-200" href="#">Privacy Policy</a></li>
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Company</h6>
+<ul class="space-y-2 text-sm">
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="about.html">About Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="contact.html">Contact Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="https://m.me/vngrouptourist" target="_blank" rel="noopener">Message us on Messenger</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="https://vngrouptourist.vn" target="_blank" rel="noopener" hreflang="vi">Vietnamese website</a></li>
 </ul>
 </div>
 <div class="space-y-4">
-<h6 class="text-ink dark:text-cream font-bold uppercase tracking-widest text-xs">Newsletter</h6>
-<p class="text-ink-2 dark:text-brand-light text-sm">Join our list for exclusive travel stories and early access to tours.</p>
-<div class="flex gap-2">
-<input class="bg-white border-none rounded-full px-4 py-2 flex-1 text-sm focus:ring-2 focus:ring-primary" placeholder="Your email" type="email"/>
-<button class="bg-primary text-on-primary p-2 rounded-full px-4 hover:scale-105 transition-transform">Join</button>
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Contact</h6>
+<ul class="space-y-3 text-sm text-ink-2">
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">location_on</span><span>93/8 Pham Van Hai, Tan Son Hoa Ward, Ho Chi Minh City, Vietnam</span></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">call</span><span><a class="hover:text-brand" href="tel:+84931867376">+84 931 867 376</a><br/><a class="hover:text-brand" href="tel:+84938322487">+84 938 322 487</a></span></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">mail</span><a class="hover:text-brand break-all" href="mailto:info@vngrouptourist.com">info@vngrouptourist.com</a></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">schedule</span><span>Monday to Saturday</span></li>
+</ul>
 </div>
 </div>
-</div>
-<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-ink/10 text-center">
-<p class="text-ink-2 dark:text-brand-light text-xs opacity-70">© 2024 VNGroup Tourist. Editorial Gateway to the East.</p>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 text-xs text-ink-2">
+<p>© 2026 VNGroup Tourist Co., Ltd. All rights reserved.</p>
 </div>
 </footer>
 </body></html>

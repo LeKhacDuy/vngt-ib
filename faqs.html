@@ -86,7 +86,7 @@
                     </p>
 <div class="flex items-center gap-4 p-2 bg-surface-container-low rounded-full border border-outline-variant/15 max-w-md focus-within:ring-2 focus-within:ring-primary/20 transition-all">
 <span class="material-symbols-outlined ml-3 text-on-surface-variant" data-icon="search">search</span>
-<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-body" placeholder="Search for questions..." type="text"/>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-body" id="faq-search" placeholder="Search for questions..." type="search"/>
 </div>
 </div>
 <div class="relative">
@@ -97,10 +97,10 @@
 <!-- Overlapping Chip -->
 <div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-6 rounded-xl shadow-xl max-w-[240px]">
 <div class="flex items-center gap-3 mb-2">
-<span class="material-symbols-outlined text-secondary" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
-<span class="font-headline font-bold text-on-surface">Safe Travels</span>
+<span class="material-symbols-outlined text-secondary" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+<span class="font-headline font-bold text-on-surface">Local guides</span>
 </div>
-<p class="text-xs text-on-surface-variant leading-relaxed">Our guides are certified and our protocols exceed international standards.</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">English-speaking guides on our tours, other languages on request.</p>
 </div>
 </div>
 </div>
@@ -180,7 +180,8 @@
 </div>
 <div class="accordion-content">
 <div class="px-6 pb-6 text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
-                                    We accept all major credit cards (Visa, MasterCard, Amex), bank transfers, and secure online payments via Stripe. For local bookings, we also facilitate MoMo and direct bank deposits.
+                                    Bank transfer to our USD or VND account, with no fee on our side (you only pay your own bank's fee), or a credit card (Visa, Mastercard, Apple Pay) through an online payment link, which adds a 3% fee.
+                                    <br/><br/>For multi-day tours we usually ask for 50% of the tour cost when the booking is confirmed, 30% three days before the tour starts, and the remaining 20% in cash on arrival or by payment link. Airfares are paid in full at confirmation. Each tour page shows its exact terms under "Payment &amp; cancellation".
                                 </div>
 </div>
 </div>
@@ -191,7 +192,10 @@
 </div>
 <div class="accordion-content">
 <div class="px-6 pb-6 text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
-                                    Yes, we offer flexible cancellation. Cancellations made 30 days prior to the tour receive a 100% refund (minus bank fees). Cancellations within 14-29 days receive a 50% refund.
+                                    Yes. Please send cancellations in writing; email is fine.
+                                    <br/><br/><strong class="text-on-surface">Day tours:</strong> free cancellation at least 7 days before departure, a 50% fee 3 to 6 days before, and a 100% fee within 2 days.
+                                    <br/><strong class="text-on-surface">Multi-day tours:</strong> 30 days or more before the service date, a full refund minus bank fees; 16 to 29 days, 50% of the deposit; 8 to 15 days, 25% of the deposit; less than 8 days, no refund.
+                                    <br/><br/>Some public holidays have their own terms. The exact policy for each tour is on its tour page.
                                 </div>
 </div>
 </div>
@@ -213,7 +217,7 @@
 </div>
 <div class="accordion-content">
 <div class="px-6 pb-6 text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
-                                    While not mandatory for entry, VNGroup Tourist <strong class="text-tertiary">highly recommends</strong> comprehensive travel insurance that covers medical emergencies and trip cancellations.
+                                    It is not required for entry, but we <strong class="text-tertiary">strongly recommend</strong> travel insurance that covers medical emergencies and trip cancellations. Travel insurance is not included in our tour prices.
                                 </div>
 </div>
 </div>
@@ -224,7 +228,7 @@
 </div>
 <div class="accordion-content">
 <div class="px-6 pb-6 text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
-                                    Tap water is generally not safe for drinking. We provide filtered water stations on all our tours and encourage guests to bring reusable bottles to minimize plastic waste.
+                                    Tap water is not safe to drink. Most of our tours include bottled water, and bottled water is cheap and sold everywhere.
                                 </div>
 </div>
 </div>
@@ -259,13 +263,13 @@
 <div class="bg-primary-container rounded-xl p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
 <div class="z-10 text-center md:text-left">
 <h2 class="text-3xl font-headline font-extrabold text-on-primary-container mb-2">Still have questions?</h2>
-<p class="text-on-primary-container/80 text-lg">Our travel experts are ready to help you plan your perfect escape.</p>
+<p class="text-on-primary-container/80 text-lg">Our team replies within 24 hours, Monday to Saturday.</p>
 </div>
-<div class="flex gap-4 z-10">
-<a href="contact.html" class="bg-on-primary-container text-white px-8 py-3 rounded-full font-headline font-bold hover:scale-105 transition-transform">
+<div class="flex flex-col sm:flex-row gap-4 z-10">
+<a href="https://m.me/vngrouptourist" target="_blank" rel="noopener" class="bg-on-primary-container text-white px-8 py-3 rounded-full font-headline font-bold hover:scale-105 transition-transform">
                         Chat with Us
                     </a>
-<a href="contact.html" class="bg-transparent border border-on-primary-container text-on-primary-container px-8 py-3 rounded-full font-headline font-bold hover:bg-on-primary-container/5 transition-colors">
+<a href="mailto:info@vngrouptourist.com" class="bg-transparent border border-on-primary-container text-on-primary-container px-8 py-3 rounded-full font-headline font-bold hover:bg-on-primary-container/5 transition-colors">
                         Email Support
                     </a>
 </div>
@@ -275,44 +279,60 @@
 </section>
 </main>
 <!-- Footer -->
-<footer class="bg-surface-container-low dark:bg-ink-dark w-full py-12 px-8">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
-<div class="col-span-1 md:col-span-1">
-<span class="text-xl font-bold text-ink dark:text-brand mb-4 block">VNGroup Tourist</span>
-<p class="text-stone-500 dark:text-stone-500 font-['Be_Vietnam_Pro'] text-sm leading-relaxed mb-6">
-                    Curating high-end, editorial travel experiences across the soul of Indochina.
-                </p>
-</div>
+<footer class="bg-surface-container-low w-full pt-16 pb-10 px-6 md:px-8 mt-20 leading-relaxed">
+<!-- Company details match vngrouptourist.vn. Keep the two sites in step. -->
+<div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 <div>
-<h4 class="font-headline font-bold text-ink dark:text-brand-light mb-4">Explore</h4>
-<ul class="space-y-2 text-stone-500 font-['Be_Vietnam_Pro'] text-sm">
-<li><a class="hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="about.html">Our Story</a></li>
-<li><a class="hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Sustainability Commitment</a></li>
-<li><a class="hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Partner With Us</a></li>
+<img src="assets/img/logo.png" alt="VNGroup Tourist" width="166" height="40" class="h-10 w-auto mb-6"/>
+<p class="text-ink-2 text-sm mb-6">Tours across Vietnam with local guides, from VNGroup Tourist, a Ho Chi Minh City travel company founded in 2023.</p>
+<div class="flex flex-wrap gap-2 text-xs font-semibold">
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.facebook.com/vngrouptourist" target="_blank" rel="noopener">Facebook</a>
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.youtube.com/@DuLichVNGroupTourist" target="_blank" rel="noopener">YouTube</a>
+<a class="px-3 py-1.5 rounded-full bg-white text-ink hover:bg-brand hover:text-white transition-colors" href="https://www.tiktok.com/@dulichvngrouptourist" target="_blank" rel="noopener">TikTok</a>
+</div>
+</div>
+<div class="space-y-4">
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Explore</h6>
+<ul class="space-y-2 text-sm">
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="tours.html">All Tours</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="destinations.html">Destinations</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="booking.html">Book a Tour</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="faqs.html">FAQs</a></li>
 </ul>
 </div>
-<div>
-<h4 class="font-headline font-bold text-ink dark:text-brand-light mb-4">Support</h4>
-<ul class="space-y-2 text-stone-500 font-['Be_Vietnam_Pro'] text-sm">
-<li><a class="text-ink dark:text-brand-light font-semibold hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="faqs.html">FAQs</a></li>
-<li><a class="hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a></li>
-<li><a class="hover:underline decoration-brand underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a></li>
+<div class="space-y-4">
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Company</h6>
+<ul class="space-y-2 text-sm">
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="about.html">About Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="contact.html">Contact Us</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="https://m.me/vngrouptourist" target="_blank" rel="noopener">Message us on Messenger</a></li>
+<li><a class="text-ink-2 hover:text-brand transition-colors" href="https://vngrouptourist.vn" target="_blank" rel="noopener" hreflang="vi">Vietnamese website</a></li>
 </ul>
 </div>
-<div>
-<h4 class="font-headline font-bold text-ink dark:text-brand-light mb-4">Connect</h4>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
-<span class="material-symbols-outlined text-ink" data-icon="share">share</span>
-</a>
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
-<span class="material-symbols-outlined text-ink" data-icon="mail">mail</span>
-</a>
+<div class="space-y-4">
+<h6 class="text-ink font-bold uppercase tracking-widest text-xs">Contact</h6>
+<ul class="space-y-3 text-sm text-ink-2">
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">location_on</span><span>93/8 Pham Van Hai, Tan Son Hoa Ward, Ho Chi Minh City, Vietnam</span></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">call</span><span><a class="hover:text-brand" href="tel:+84931867376">+84 931 867 376</a><br/><a class="hover:text-brand" href="tel:+84938322487">+84 938 322 487</a></span></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">mail</span><a class="hover:text-brand break-all" href="mailto:info@vngrouptourist.com">info@vngrouptourist.com</a></li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-brand text-lg leading-5">schedule</span><span>Monday to Saturday</span></li>
+</ul>
 </div>
 </div>
-</div>
-<div class="max-w-7xl mx-auto border-t border-outline-variant/10 mt-12 pt-8 text-center md:text-left">
-<p class="text-stone-500 font-['Be_Vietnam_Pro'] text-sm">© 2024 VNGroup Tourist. A VNGroup Tourist Indochine Experience.</p>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-ink/10 text-xs text-ink-2">
+<p>© 2026 VNGroup Tourist Co., Ltd. All rights reserved.</p>
 </div>
 </footer>
+<script>
+// Filter the questions as the visitor types; hide a category with no match.
+document.getElementById('faq-search')?.addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.accordion-item').forEach(item => {
+    item.classList.toggle('hidden', !!q && !item.textContent.toLowerCase().includes(q));
+  });
+  document.querySelectorAll('.scroll-mt-28[id]').forEach(cat => {
+    cat.classList.toggle('hidden', !cat.querySelector('.accordion-item:not(.hidden)'));
+  });
+});
+</script>
 </body></html>

@@ -52,6 +52,14 @@ window.VNGT = (function () {
     const DEST_ORDER = DESTINATIONS.map(d => d[0]);
     // A few tours point at the Vietnamese site's "hcm" destination instead of "inbound_hcm".
     const DEST_ALIAS = { hcm: 'inbound_hcm' };
+    // Cities sit inside a region, so "Southern Vietnam" also lists Ho Chi Minh City and Phu Quoc tours.
+    const REGION_OF = {
+        inbound_hanoi: 'inbound_mienbac',
+        inbound_danang: 'inbound_mientrung',
+        inbound_nhatrang: 'inbound_mientrung',
+        inbound_hcm: 'inbound_miennam',
+        inbound_phuquoc: 'inbound_miennam',
+    };
 
     function stripAccents(s) {
         return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -74,7 +82,13 @@ window.VNGT = (function () {
         return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
     }
 
-    // [{ code, name, count }] for the destinations that actually have tours.
+    function inDestination(tour, code) {
+        const own = destinationCode(tour.destination);
+        return own === code || REGION_OF[own] === code;
+    }
+
+    // [{ code, name, count, parent }] for the destinations that have tours.
+    // A region's count includes its cities; parent is set on cities.
     function destinationsOf(tours) {
         const counts = {};
         const names = {};
@@ -83,10 +97,15 @@ window.VNGT = (function () {
             if (!code) return;
             counts[code] = (counts[code] || 0) + 1;
             names[code] = destinationName(t.destination);
+            const region = REGION_OF[code];
+            if (region) {
+                counts[region] = (counts[region] || 0) + 1;
+                names[region] = DEST_NAME[region];
+            }
         });
         return Object.keys(counts)
             .sort(compareDestinations)
-            .map(code => ({ code, name: names[code], count: counts[code] }));
+            .map(code => ({ code, name: names[code], count: counts[code], parent: REGION_OF[code] || '' }));
     }
 
     /* ---------- Tour tags ---------- */
@@ -325,7 +344,7 @@ window.VNGT = (function () {
 
     return {
         API_BASE, loadTours,
-        destinationCode, destinationName, destinationsOf,
+        destinationCode, destinationName, destinationsOf, inDestination,
         hasTag, tagBadges,
         esc, days, price, priceLabel, hotels, tidy,
         image, fallback,
